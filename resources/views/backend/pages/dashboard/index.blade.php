@@ -1,4 +1,7 @@
 @extends('backend.layouts.master')
+@section('title')
+    Dashboard Page - Admin Panel
+@endsection
 
 @section('admin-content')
 <div id="main">
