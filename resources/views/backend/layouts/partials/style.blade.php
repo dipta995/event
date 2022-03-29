@@ -7,3 +7,14 @@
     <link rel="stylesheet" href="{{ asset('backend/assets/vendors/perfect-scrollbar/perfect-scrollbar.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/assets/vendors/bootstrap-icons/bootstrap-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/assets/css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/assets/vendors/jquery-datatables/jquery.dataTables.bootstrap5.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/assets/vendors/fontawesome/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/assets/vendors/toastify/toastify.css') }}">
+    <style>
+        table.dataTable td{
+            padding: 15px 8px;
+        }
+        .fontawesome-icons .the-icon svg {
+            font-size: 24px;
+        }
+    </style>

@@ -24,43 +24,71 @@ class RolePermissionSeeder extends Seeder
 
         //permission list as array
         $permissions =[
+
             //dashbord permission
-            'dashboard.view',
+            [
+                'group_name' => 'dashboard',
+                'permissions' =>[
+                    'dashboard.view',
+                    'dashboard.edit',
+                ]
+            ],
             //blog permissions
-            'blog.create',
-            'blog.view',
-            'blog.edit',
-            'blog.delete',
-            'blog.approve',
+            [
+                'group_name' => 'blog',
+                'permissions' =>[
+                    'blog.create',
+                    'blog.view',
+                    'blog.edit',
+                    'blog.delete',
+                    'blog.approve',
+                ]
+            ],
 
             //role permissions
-            'role.create',
-            'role.view',
-            'role.edit',
-            'role.delete',
-            'role.approve',
+            [
+                'group_name' => 'role',
+                'permissions' =>[
+                    'role.create',
+                    'role.view',
+                    'role.edit',
+                    'role.delete',
+                    'role.approve',
+                ]
+            ],
 
             //admin permissions
-            'admin.create',
-            'admin.view',
-            'admin.edit',
-            'admin.delete',
-            'admin.approve',
+            [
+                'group_name' => 'admin',
+                'permissions' =>[
+                    'admin.create',
+                    'admin.view',
+                    'admin.edit',
+                    'admin.delete',
+                    'admin.approve',
+                ]
+            ],
 
             //profile permissions
-            'profile.create',
-            'profile.view',
-            'profile.edit',
-            'profile.delete',
-            'profile.approve',
+            [
+                'group_name' => 'profile',
+                'permissions' =>[
+                    'profile.view',
+                    'profile.edit',
+
+                ]
+            ],
         ];
 
         //create and assign permission
         for ($i=0; $i < count($permissions); $i++) {
+            $permissionGroup = $permissions[$i]['group_name'];
+            for ($j=0; $j < count($permissions[$i]['permissions']); $j++) {
             //create permission
-            $permission = Permission::create(['name'=>$permissions[$i]]);
+            $permission = Permission::create(['name'=>$permissions[$i]['permissions'][$j],'group_name' => $permissionGroup]);
             $roleSuperAdmin->givePermissionTo($permission);
             $permission->assignRole($roleSuperAdmin);
         }
+     }
     }
 }
