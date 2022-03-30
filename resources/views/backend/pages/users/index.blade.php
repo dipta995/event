@@ -45,8 +45,12 @@
                             <td>{{ $loop->index+1 }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
-                            <td>{{ $user->name }}</td>
-                           
+                            <td>
+                                @foreach ($user->roles as $item)
+                                <span class="badge bg-success">{{ $item->name }}</span>
+                                @endforeach
+                            </td>
+
                             <td>
                                 <a class="badge bg-info" href="{{ route('admin.users.edit',$user->id) }}">Edit</a>
                                 <a class="badge bg-danger" href="">Delete</a>

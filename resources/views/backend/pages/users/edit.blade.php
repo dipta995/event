@@ -31,55 +31,39 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
-                           <form action="{{ route('admin.roles.update',$role->id) }}" method="POST">
-                            @csrf
+                           <form action="{{ route('admin.users.update',$user->id) }}" method="POST">
                             @method('PUT')
+                            @csrf
                             <div class="form-group">
-                                <label for="basicInput">Role</label>
-                                <input value="{{ $role->name }}" type="text" name="name" class="form-control" id="basicInput" placeholder="Enter role">
+                                <label for="basicInput">Name</label>
+                                <input type="text" name="name" class="form-control" id="basicInput" value="{{ $user->name }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="basicInput">Email</label>
+                                <input type="email" name="email" class="form-control" id="basicInput" value="{{ $user->email }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="basicInput">Password</label>
+                                <input type="text" name="password" class="form-control" id="basicInput" placeholder="Enter Password">
+                            </div>
+                            <div class="form-group">
+                                <label for="basicInput">Confirm Password</label>
+                                <input type="text" name="password_confirmation" class="form-control" id="basicInput" placeholder="Enter Confirm Password">
                             </div>
 
 
-                            @foreach ($permission_groups as $group)
-                                <div class="row">
-                                    @php  $i = 1;  @endphp
-                                    <div class="col-md-4">
-                                        <div class="form-check form-switch">
-                                            {{-- <input value="" class="form-check-input" name="" type="checkbox" id="flexSwitchCheckDefault"> --}}
-                                            <label class="form-check-label" for="flexSwitchCheckDefault">{{ $group->name }}</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-7">
-                                        @php
-                                        // $permissions = DB::('permissions')->getpermissionsByGroupName($group->name);
-                                            $j=1;
-                                        @endphp
-                                        @foreach ($permissions as $permission)
+                            <div class="form-group">
+                                <select name="roles[]" class="choices form-select multiple-remove" multiple="multiple">
 
-                                        @if ($permission->group_name == $group->name)
-                                            <div class="form-check form-switch">
-                                            <input  {{ $role->hasPermissionTo($permission->name)==1 ? 'checked' : '' }}  value="{{ $permission->id }}" class="form-check-input" name="permissions[]" type="checkbox" id="flexSwitchCheckDefault">
-                                            <label class="form-check-label" for="flexSwitchCheckDefault">{{ $permission->name }}</label>
-                                        </div>
+                                        @foreach ($roles as $role)
 
-                                        @endif
-
-
-                                        @php
-                                        $j++;
-                                    @endphp
+                                        <option {{ $user->hasRole($role->name) ? 'selected':'' }}  value="{{ $role->id }}">{{ $role->name }}</option>
                                         @endforeach
-                                        <hr>
-                                    </div>
-
-                                </div>
-                                @php
-                                $i++;
-                            @endphp
-                            @endforeach
 
 
 
+                                </select>
+                            </div>
 
 
                               {{-- <div class="form-check form-switch">

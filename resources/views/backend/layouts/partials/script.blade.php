@@ -12,6 +12,8 @@
 <script src="{{ asset('backend/assets/vendors/fontawesome/all.min.js') }}"></script>
 <script src="{{ asset('backend/assets/vendors/toastify/toastify.js') }}"></script>
 <script src="{{ asset('backend/assets/js/extensions/toastify.js') }}"></script>
+<script src="{{ asset('backend/assets/vendors/choices.js/choices.min.js') }}"></script>
+<script src="{{ asset('backend/assets/js/pages/form-element-select.js') }}"></script>
 <script src="{{ asset('backend/assets/js/mazer.js') }}"></script>
 <script>
     // Jquery Datatable
