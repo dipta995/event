@@ -21,7 +21,22 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
+                <li class="sidebar-item  has-sub">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-stack"></i>
+                        <span>Roles</span>
+                    </a>
+                    <ul class="submenu" {{ Route::is('admin.roles.create') || Route::is('admin.roles.edit') || Route::is('admin.roles.index') ? 'style=display:block;' : '' }} >
 
+                        <li class="submenu-item ">
+                            <a {{  Route::is('admin.roles.edit') || Route::is('admin.roles.index') ? 'style=color:green;' : '' }}  href="{{ route('admin.roles.index') }}">Role's</a>
+                            <a {{  Route::is('admin.roles.create') ? 'style=color:green;' : '' }} href="{{ route('admin.roles.create') }}">Create Role</a>
+                        </li>
+
+
+
+                    </ul>
+                </li>
                 <li class="sidebar-item  has-sub">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-stack"></i>

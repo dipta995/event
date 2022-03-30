@@ -1,6 +1,6 @@
 @extends('backend.layouts.master')
 @section('title')
-    Rols
+    Users
 @endsection
 
 @section('admin-content')
@@ -33,23 +33,22 @@
                     <tr>
                         <th>Sl</th>
                         <th>Name</th>
-                        <th>Permissions</th>
+                        <th>Email</th>
+                        <th>Roles</th>
                         <th>Action</th>
 
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        @foreach ($roles as $role)
+                        @foreach ($users as $user)
                             <td>{{ $loop->index+1 }}</td>
-                            <td>{{ $role->name }}</td>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>{{ $user->name }}</td>
+                           
                             <td>
-                                @foreach ($role->permissions as $item)
-                                <span class="badge bg-success">{{ $item->name }}</span>
-                                @endforeach
-                            </td>
-                            <td>
-                                <a class="badge bg-info" href="{{ route('admin.roles.edit',$role->id) }}">Edit</a>
+                                <a class="badge bg-info" href="{{ route('admin.users.edit',$user->id) }}">Edit</a>
                                 <a class="badge bg-danger" href="">Delete</a>
                             </td>
                         </tr>

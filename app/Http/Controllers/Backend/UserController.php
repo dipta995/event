@@ -1,11 +1,11 @@
 <?php
+
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 
 class RolesController extends Controller
 {
@@ -16,8 +16,8 @@ class RolesController extends Controller
      */
     public function index()
     {
-        $roles = Role::all();
-        return view('backend.pages.roles.index',compact('roles'));
+        $users = User::all();
+        return view('backend.pages.users.index',compact('users'));
     }
 
     /**
@@ -27,10 +27,8 @@ class RolesController extends Controller
      */
     public function create()
     {
-        $permission_groups=User::getpermissionGroup();
-
-        $permissions = Permission::all();
-        return view('backend.pages.roles.create',compact('permissions','permission_groups'));
+        $roles = User::all();
+        return view('backend.pages.users.create',compact('roles'));
     }
 
     /**
@@ -42,17 +40,17 @@ class RolesController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'=> 'required|max:100|unique:roles'
+            'name'=> 'required|max:100|unique:users'
         ],[
-            'name.required' => 'Please Insert New Role Name'
+            'name.required' => 'Please Insert New User Name'
         ]);
-        $role = Role::create(['name' => $request->name]);
+        $user = User::create(['name' => $request->name]);
         $permissions = $request->permissions;
-        if ($role) {
+        if ($user) {
             if (!empty($permissions)) {
-                $role->syncPermissions($permissions);
+                $user->syncPermissions($permissions);
             }
-            return back()->with('success','New Role Created');
+            return back()->with('success','New User Created');
         }
     }
 
@@ -75,10 +73,9 @@ class RolesController extends Controller
      */
     public function edit($id)
     {
-        $role = Role::findById($id);
-        $permission_groups=User::getpermissionGroup();
-        $permissions = Permission::all();
-        return view('backend.pages.roles.edit',compact('role','permissions','permission_groups'));
+        $user = User::findById($id);
+        $roles = Role::all();
+        return view('backend.pages.users.edit',compact('user','roles'));
     }
 
     /**
@@ -93,18 +90,18 @@ class RolesController extends Controller
         $request->validate([
             'name'=> 'required|max:100'
         ],[
-            'name.required' => 'Please Insert New Role Name'
+            'name.required' => 'Please Insert New User Name'
         ]);
-        // $role = Role::create(['name' => $request->name]);
-        $role = Role::findById($id);
+        // $user = User::create(['name' => $request->name]);
+        $user = User::findById($id);
         $permissions = $request->permissions;
-        if ($role) {
+        if ($user) {
             if (!empty($permissions)) {
-                $role->name = $request->name;
-                $role->save();
-                $role->syncPermissions($permissions);
+                $user->name = $request->name;
+                $user->save();
+                $user->syncPermissions($permissions);
             }
-            return back()->with('success','New Role Created');
+            return back()->with('success','New User Created');
         }
     }
 
@@ -116,7 +113,13 @@ class RolesController extends Controller
      */
     public function destroy($id)
     {
-        //
+         $user = User::findById($id);
+         if (!is_null($user)) {
+             $user->delete();
+         }
+         session()->flash('success','user has been deleted');
+         return back();
+
     }
 }
 
