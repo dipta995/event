@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
@@ -16,27 +17,27 @@ class RolePermissionSeeder extends Seeder
      */
     public function run()
     {
-        //create roles
+        // Create Roles
         $roleSuperAdmin = Role::create(['name' => 'superadmin']);
         $roleAdmin = Role::create(['name' => 'admin']);
         $roleEditor = Role::create(['name' => 'editor']);
         $roleUser = Role::create(['name' => 'user']);
 
-        //permission list as array
-        $permissions =[
 
-            //dashbord permission
+        // Permission List as array
+        $permissions = [
+
             [
                 'group_name' => 'dashboard',
-                'permissions' =>[
+                'permissions' => [
                     'dashboard.view',
                     'dashboard.edit',
                 ]
             ],
-            //blog permissions
             [
                 'group_name' => 'blog',
-                'permissions' =>[
+                'permissions' => [
+                    // Blog Permissions
                     'blog.create',
                     'blog.view',
                     'blog.edit',
@@ -44,23 +45,10 @@ class RolePermissionSeeder extends Seeder
                     'blog.approve',
                 ]
             ],
-
-            //role permissions
-            [
-                'group_name' => 'role',
-                'permissions' =>[
-                    'role.create',
-                    'role.view',
-                    'role.edit',
-                    'role.delete',
-                    'role.approve',
-                ]
-            ],
-
-            //admin permissions
             [
                 'group_name' => 'admin',
-                'permissions' =>[
+                'permissions' => [
+                    // admin Permissions
                     'admin.create',
                     'admin.view',
                     'admin.edit',
@@ -68,27 +56,46 @@ class RolePermissionSeeder extends Seeder
                     'admin.approve',
                 ]
             ],
-
-            //profile permissions
+            [
+                'group_name' => 'role',
+                'permissions' => [
+                    // role Permissions
+                    'role.create',
+                    'role.view',
+                    'role.edit',
+                    'role.delete',
+                    'role.approve',
+                ]
+            ],
             [
                 'group_name' => 'profile',
-                'permissions' =>[
+                'permissions' => [
+                    // profile Permissions
                     'profile.view',
                     'profile.edit',
-
                 ]
             ],
         ];
 
-        //create and assign permission
-        for ($i=0; $i < count($permissions); $i++) {
+
+        // Create and Assign Permissions
+        for ($i = 0; $i < count($permissions); $i++) {
             $permissionGroup = $permissions[$i]['group_name'];
-            for ($j=0; $j < count($permissions[$i]['permissions']); $j++) {
-            //create permission
-            $permission = Permission::create(['name'=>$permissions[$i]['permissions'][$j],'group_name' => $permissionGroup]);
-            $roleSuperAdmin->givePermissionTo($permission);
-            $permission->assignRole($roleSuperAdmin);
+            for ($j = 0; $j < count($permissions[$i]['permissions']); $j++) {
+                // Create Permission
+                $permission = Permission::create(['name' => $permissions[$i]['permissions'][$j], 'group_name' => $permissionGroup]);
+                $roleSuperAdmin->givePermissionTo($permission);
+                $permission->assignRole($roleSuperAdmin);
+            }
         }
-     }
+
+        //to register super admin at model has roles table
+        //here role_id =superadmin model_id=customer_id
+        DB::table('model_has_roles')->insert([
+            'role_id' => 1,
+            'model_type' => 'App\Models\User',
+            'model_id' => 1
+
+        ]);
     }
 }
