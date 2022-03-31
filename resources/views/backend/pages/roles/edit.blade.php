@@ -88,7 +88,7 @@
                                     input</label>
                             </div> --}}
 
-                                <button type="submit" class="btn btn-outline-success">With Buttons</button>
+                                <button type="submit" class="btn btn-outline-success">Update</button>
                            </form>
 
                         </div>

@@ -5,11 +5,21 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
+    public $user;
+
+    public function __construct()
+    {
+        $this->middleware(function($request,$next){
+            $this->user = Auth::guard('web')->user();
+            return $next($request);
+        });
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,6 +27,9 @@ class UserController extends Controller
      */
     public function index()
     {
+        if (is_null($this->user) || !$this->user->can('admin.view')) {
+            abort(403,'Unauthorized Access');
+        }
         $users = User::all();
         return view('backend.pages.users.index',compact('users'));
     }
@@ -28,6 +41,9 @@ class UserController extends Controller
      */
     public function create()
     {
+        if (is_null($this->user) || !$this->user->can('admin.create')) {
+            abort(403,'Unauthorized Access');
+        }
         $roles = Role::all();
         return view('backend.pages.users.create',compact('roles'));
     }
@@ -40,6 +56,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        if (is_null($this->user) || !$this->user->can('admin.create')) {
+            abort(403,'Unauthorized Access');
+        }
         $request->validate([
             'name'=> 'required|max:50',
             'email'=> 'required|unique:users',
@@ -88,6 +107,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        if (is_null($this->user) || !$this->user->can('admin.edit')) {
+            abort(403,'Unauthorized Access');
+        }
         $user = User::find($id);
         $roles = Role::all();
         return view('backend.pages.users.edit',compact('user','roles'));
@@ -102,6 +124,9 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (is_null($this->user) || !$this->user->can('admin.edit')) {
+            abort(403,'Unauthorized Access');
+        }
 
         $user = User::find($id);
         $request->validate([
@@ -135,6 +160,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        if (is_null($this->user) || !$this->user->can('admin.delete')) {
+            abort(403,'Unauthorized Access');
+        }
          $user = User::findById($id);
          if (!is_null($user)) {
              $user->delete();

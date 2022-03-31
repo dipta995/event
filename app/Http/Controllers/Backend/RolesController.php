@@ -4,11 +4,26 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
 class RolesController extends Controller
 {
+    public $user;
+
+    public function __construct()
+    {
+        $this->middleware(function($request,$next){
+            $this->user = Auth::guard('web')->user();
+            return $next($request);
+        });
+    }
+
+
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -16,6 +31,9 @@ class RolesController extends Controller
      */
     public function index()
     {
+        if (is_null($this->user) || !$this->user->can('role.view')) {
+            abort(403,'Unauthorized Access');
+        }
         $roles = Role::all();
         return view('backend.pages.roles.index',compact('roles'));
     }
@@ -27,6 +45,9 @@ class RolesController extends Controller
      */
     public function create()
     {
+        if (is_null($this->user) || !$this->user->can('role.create')) {
+            abort(403,'Unauthorized Access');
+        }
         $permission_groups=User::getpermissionGroup();
 
         $permissions = Permission::all();
@@ -41,6 +62,9 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
+        if (is_null($this->user) || !$this->user->can('role.create')) {
+            abort(403,'Unauthorized Access');
+        }
         $request->validate([
             'name'=> 'required|max:100|unique:roles'
         ],[
@@ -75,6 +99,9 @@ class RolesController extends Controller
      */
     public function edit($id)
     {
+        if (is_null($this->user) || !$this->user->can('role.edit')) {
+            abort(403,'Unauthorized Access');
+        }
         $role = Role::findById($id);
         $permission_groups=User::getpermissionGroup();
         $permissions = Permission::all();
@@ -90,6 +117,9 @@ class RolesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (is_null($this->user) || !$this->user->can('role.edit')) {
+            abort(403,'Unauthorized Access');
+        }
         $request->validate([
             'name'=> 'required|max:100'
         ],[
@@ -116,7 +146,16 @@ class RolesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (is_null($this->user) || !$this->user->can('role.delete')) {
+            abort(403,'Unauthorized Access');
+        }
+        $role = Role::findById($id);
+        if (!is_null($role)) {
+            $role->delete();
+        }
+        session()->flash('success','user has been deleted');
+        return back();
+
     }
 }
 

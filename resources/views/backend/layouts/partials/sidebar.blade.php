@@ -1,3 +1,6 @@
+@php
+    $userGuard = Auth::guard('web')->user();
+@endphp
 <div id="sidebar" class="active">
     <div class="sidebar-wrapper active">
         <div class="sidebar-header">
@@ -22,6 +25,7 @@
                     </a>
                 </li>
                 {{-- Role Crud --}}
+                @if ( $userGuard->can('role.view') || $userGuard->can('role.create') || $userGuard->can('role.edit') || $userGuard->can('role.delete'))
                 <li class="sidebar-item  has-sub">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-stack"></i>
@@ -29,12 +33,18 @@
                     </a>
                     <ul class="submenu" {{ Route::is('admin.roles.create') || Route::is('admin.roles.edit') || Route::is('admin.roles.index') ? 'style=display:block;' : '' }} >
                         <li class="submenu-item ">
-                            <a {{  Route::is('admin.roles.edit') || Route::is('admin.roles.index') ? 'style=color:green;' : '' }}  href="{{ route('admin.roles.index') }}">Role's</a>
-                            <a {{  Route::is('admin.roles.create') ? 'style=color:green;' : '' }} href="{{ route('admin.roles.create') }}">Create Role</a>
+                            @if ( $userGuard->can('role.view'))
+                            <a {{  Route::is('admin.roles.edit') || Route::is('admin.roles.index') ? 'style=color:#435ebe;' : '' }}  href="{{ route('admin.roles.index') }}">Role's</a>
+                            @endif
+                            @if ( $userGuard->can('role.create'))
+                            <a {{  Route::is('admin.roles.create') ? 'style=color:#435ebe;' : '' }} href="{{ route('admin.roles.create') }}">Create Role</a>
+                            @endif
                         </li>
                     </ul>
                 </li>
+                @endif
                 {{-- Permission --}}
+                @if ( $userGuard->can('admin.view') || $userGuard->can('admin.create') || $userGuard->can('admin.edit') || $userGuard->can('admin.delete'))
                 <li class="sidebar-item  has-sub">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-stack"></i>
@@ -42,11 +52,16 @@
                     </a>
                     <ul class="submenu" {{ Route::is('admin.users.create') || Route::is('admin.users.edit') || Route::is('admin.users.index') ? 'style=display:block;' : '' }} >
                         <li class="submenu-item ">
-                            <a {{  Route::is('admin.users.edit') || Route::is('admin.users.index') ? 'style=color:green;' : '' }}  href="{{ route('admin.users.index') }}">User's</a>
-                            <a {{  Route::is('admin.users.create') ? 'style=color:green;' : '' }} href="{{ route('admin.users.create') }}">Create User's</a>
+                            @if ( $userGuard->can('admin.view'))
+                            <a {{  Route::is('admin.users.edit') || Route::is('admin.users.index') ? 'style=color:#435ebe;' : '' }}  href="{{ route('admin.users.index') }}">User's</a>
+                            @endif
+                            @if ( $userGuard->can('admin.create'))
+                            <a {{  Route::is('admin.users.create') ? 'style=color:#435ebe;' : '' }} href="{{ route('admin.users.create') }}">Create User's</a>
+                            @endif
                         </li>
                     </ul>
                 </li>
+                @endif
                 <li class="sidebar-item  has-sub">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-stack"></i>
@@ -383,10 +398,16 @@
                 </li>
 
                 <li class="sidebar-item  ">
-                    <a href="https://github.com/zuramai/mazer#donate" class='sidebar-link'>
-                        <i class="bi bi-cash"></i>
-                        <span>Donate</span>
-                    </a>
+
+                        <form method="POST" action="{{ route('logout') }}" x-data>
+                            @csrf
+                                <i class="bi bi-cash"></i>
+                            <x-jet-dropdown-link  href="{{ route('logout') }}"
+                                     @click.prevent="$root.submit();">
+                                     <span> {{ __('Log Out') }}</span>
+                            </x-jet-dropdown-link>
+                        </form>
+
                 </li>
 
             </ul>

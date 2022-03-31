@@ -49,8 +49,12 @@
                                 @endforeach
                             </td>
                             <td>
+                                @if ( Auth::guard('web')->user()->can('role.edit'))
                                 <a class="badge bg-info" href="{{ route('admin.roles.edit',$role->id) }}">Edit</a>
+                                @endif
+                                @if ( Auth::guard('web')->user()->can('role.delete'))
                                 <a class="badge bg-danger" href="">Delete</a>
+                                @endif
                             </td>
                         </tr>
                         @endforeach
