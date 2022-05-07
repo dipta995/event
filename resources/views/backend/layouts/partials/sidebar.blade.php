@@ -24,6 +24,7 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
+                <li class="sidebar-title">Admin management</li>
                 {{-- Role Crud --}}
                 @if ( $userGuard->can('role.view') || $userGuard->can('role.create') || $userGuard->can('role.edit') || $userGuard->can('role.delete'))
                 <li class="sidebar-item  has-sub">
@@ -62,350 +63,107 @@
                     </ul>
                 </li>
                 @endif
+                <li class="sidebar-title">User Management</li>
+                 {{-- customer --}}
+                 @if ( $userGuard->can('customer.view') || $userGuard->can('customer.create') || $userGuard->can('customer.edit') || $userGuard->can('customer.delete'))
+                 <li class="sidebar-item  has-sub">
+                     <a href="#" class='sidebar-link'>
+                         <i class="bi bi-stack"></i>
+                         <span>customer's</span>
+                     </a>
+                     <ul class="submenu" {{ Route::is('admin.customers.create') || Route::is('admin.customers.edit') || Route::is('admin.customers.index') ? 'style=display:block;' : '' }} >
+                         <li class="submenu-item ">
+                             @if ( $userGuard->can('customer.view'))
+                             <a {{  Route::is('admin.customers.edit') || Route::is('admin.customers.index') ? 'style=color:#435ebe;' : '' }}  href="{{ route('admin.customers.index') }}">customer's</a>
+                             @endif
+                             @if ( $userGuard->can('customer.create'))
+                             <a {{  Route::is('admin.customers.create') ? 'style=color:#435ebe;' : '' }} href="{{ route('admin.customers.create') }}">Create customer</a>
+                             @endif
+                         </li>
+                     </ul>
+                 </li>
+                 @endif
+
+                <li class="sidebar-title">Package Management</li>
+                {{-- package --}}
+                @if ( $userGuard->can('package.view') || $userGuard->can('package.create') || $userGuard->can('package.edit') || $userGuard->can('package.delete'))
                 <li class="sidebar-item  has-sub">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-stack"></i>
-                        <span>Components</span>
+                        <span>Package's</span>
                     </a>
-                    <ul class="submenu ">
+                    <ul class="submenu" {{ Route::is('admin.packages.create') || Route::is('admin.packages.edit') || Route::is('admin.packages.index') ? 'style=display:block;' : '' }} >
                         <li class="submenu-item ">
-                            <a href="component-alert.html">Alert</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="component-badge.html">Badge</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="component-breadcrumb.html">Breadcrumb</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="component-button.html">Button</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="component-card.html">Card</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="component-carousel.html">Carousel</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="component-dropdown.html">Dropdown</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="component-list-group.html">List Group</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="component-modal.html">Modal</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="component-navs.html">Navs</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="component-pagination.html">Pagination</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="component-progress.html">Progress</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="component-spinner.html">Spinner</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="component-tooltip.html">Tooltip</a>
+                            @if ( $userGuard->can('package.view'))
+                            <a {{  Route::is('admin.packages.edit') || Route::is('admin.packages.index') ? 'style=color:#435ebe;' : '' }}  href="{{ route('admin.packages.index') }}">Packages's</a>
+                            @endif
+                            @if ( $userGuard->can('package.create'))
+                            <a {{  Route::is('admin.packages.create') ? 'style=color:#435ebe;' : '' }} href="{{ route('admin.packages.create') }}">Create package</a>
+                            @endif
                         </li>
                     </ul>
                 </li>
+                @endif<li class="sidebar-title">Channel Management</li>
 
-                <li class="sidebar-item  has-sub">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-collection-fill"></i>
-                        <span>Extra Components</span>
-                    </a>
-                    <ul class="submenu ">
-                        <li class="submenu-item ">
-                            <a href="extra-component-avatar.html">Avatar</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="extra-component-sweetalert.html">Sweet Alert</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="extra-component-toastify.html">Toastify</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="extra-component-rating.html">Rating</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="extra-component-divider.html">Divider</a>
-                        </li>
-                    </ul>
-                </li>
+                {{-- channel --}}
+                 @if ( $userGuard->can('channel.view') || $userGuard->can('channel.create') || $userGuard->can('channel.edit') || $userGuard->can('channel.delete'))
+                 <li class="sidebar-item  has-sub">
+                     <a href="#" class='sidebar-link'>
+                         <i class="bi bi-stack"></i>
+                         <span>channel's</span>
+                     </a>
+                     <ul class="submenu" {{ Route::is('admin.channels.create') || Route::is('admin.channels.edit') || Route::is('admin.channels.index') ? 'style=display:block;' : '' }} >
+                         <li class="submenu-item ">
+                             @if ( $userGuard->can('channel.view'))
+                             <a {{  Route::is('admin.channels.edit') || Route::is('admin.channels.index') ? 'style=color:#435ebe;' : '' }}  href="{{ route('admin.channels.index') }}">channel's</a>
+                             @endif
+                             @if ( $userGuard->can('channel.create'))
+                             <a {{  Route::is('admin.channels.create') ? 'style=color:#435ebe;' : '' }} href="{{ route('admin.channels.create') }}">Create channel</a>
+                             @endif
+                         </li>
+                     </ul>
+                 </li>
+                 @endif
+                 {{-- channel_post --}}
+                 @if ( $userGuard->can('channel_post.view') || $userGuard->can('channel_post.create') || $userGuard->can('channel_post.edit') || $userGuard->can('channel_post.delete'))
+                 <li class="sidebar-item  has-sub">
+                     <a href="#" class='sidebar-link'>
+                         <i class="bi bi-stack"></i>
+                         <span>Channel Post's</span>
+                     </a>
+                     <ul class="submenu" {{ Route::is('admin.channel.posts.create') || Route::is('admin.channel.posts.edit') || Route::is('admin.channel.posts.index') ? 'style=display:block;' : '' }} >
+                         <li class="submenu-item ">
+                             @if ( $userGuard->can('channel_post.view'))
+                             <a {{  Route::is('admin.channel.posts.edit') || Route::is('admin.channel.posts.index') ? 'style=color:#435ebe;' : '' }}  href="{{ route('admin.channel.posts.index') }}">Channel Post's</a>
+                             @endif
+                             @if ( $userGuard->can('channel_post.create'))
+                             <a {{  Route::is('admin.channel.posts.create') ? 'style=color:#435ebe;' : '' }} href="{{ route('admin.channel.posts.create') }}">Create Channel Post</a>
+                             @endif
+                         </li>
+                     </ul>
+                 </li>
+                 @endif
 
-                <li class="sidebar-item  has-sub">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-grid-1x2-fill"></i>
-                        <span>Layouts</span>
-                    </a>
-                    <ul class="submenu ">
-                        <li class="submenu-item ">
-                            <a href="layout-default.html">Default Layout</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="layout-vertical-1-column.html">1 Column</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="layout-vertical-navbar.html">Vertical Navbar</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="layout-rtl.html">RTL Layout</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="layout-horizontal.html">Horizontal Menu</a>
-                        </li>
-                    </ul>
-                </li>
 
-                <li class="sidebar-title">Forms &amp; Tables</li>
 
-                <li class="sidebar-item  has-sub">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-hexagon-fill"></i>
-                        <span>Form Elements</span>
-                    </a>
-                    <ul class="submenu ">
-                        <li class="submenu-item ">
-                            <a href="form-element-input.html">Input</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="form-element-input-group.html">Input Group</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="form-element-select.html">Select</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="form-element-radio.html">Radio</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="form-element-checkbox.html">Checkbox</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="form-element-textarea.html">Textarea</a>
-                        </li>
-                    </ul>
-                </li>
 
-                <li class="sidebar-item  ">
-                    <a href="form-layout.html" class='sidebar-link'>
-                        <i class="bi bi-file-earmark-medical-fill"></i>
-                        <span>Form Layout</span>
-                    </a>
-                </li>
 
-                <li class="sidebar-item  has-sub">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-pen-fill"></i>
-                        <span>Form Editor</span>
-                    </a>
-                    <ul class="submenu ">
-                        <li class="submenu-item ">
-                            <a href="form-editor-quill.html">Quill</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="form-editor-ckeditor.html">CKEditor</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="form-editor-summernote.html">Summernote</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="form-editor-tinymce.html">TinyMCE</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="sidebar-item  ">
-                    <a href="table.html" class='sidebar-link'>
-                        <i class="bi bi-grid-1x2-fill"></i>
-                        <span>Table</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item  has-sub">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-file-earmark-spreadsheet-fill"></i>
-                        <span>Datatables</span>
-                    </a>
-                    <ul class="submenu ">
-                        <li class="submenu-item ">
-                            <a href="table-datatable.html">Datatable</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="table-datatable-jquery.html">Datatable (jQuery)</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="sidebar-title">Extra UI</li>
-
-                <li class="sidebar-item  has-sub">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-pentagon-fill"></i>
-                        <span>Widgets</span>
-                    </a>
-                    <ul class="submenu ">
-                        <li class="submenu-item ">
-                            <a href="ui-widgets-chatbox.html">Chatbox</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="ui-widgets-pricing.html">Pricing</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="ui-widgets-todolist.html">To-do List</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="sidebar-item  has-sub">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-egg-fill"></i>
-                        <span>Icons</span>
-                    </a>
-                    <ul class="submenu ">
-                        <li class="submenu-item ">
-                            <a href="ui-icons-bootstrap-icons.html">Bootstrap Icons </a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="ui-icons-fontawesome.html">Fontawesome</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="ui-icons-dripicons.html">Dripicons</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="sidebar-item  has-sub">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-bar-chart-fill"></i>
-                        <span>Charts</span>
-                    </a>
-                    <ul class="submenu ">
-                        <li class="submenu-item ">
-                            <a href="ui-chart-chartjs.html">ChartJS</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="ui-chart-apexcharts.html">Apexcharts</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="sidebar-item  ">
-                    <a href="ui-file-uploader.html" class='sidebar-link'>
-                        <i class="bi bi-cloud-arrow-up-fill"></i>
-                        <span>File Uploader</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item  has-sub">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-map-fill"></i>
-                        <span>Maps</span>
-                    </a>
-                    <ul class="submenu ">
-                        <li class="submenu-item ">
-                            <a href="ui-map-google-map.html">Google Map</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="ui-map-jsvectormap.html">JS Vector Map</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="sidebar-title">Pages</li>
-
-                <li class="sidebar-item  ">
-                    <a href="application-email.html" class='sidebar-link'>
-                        <i class="bi bi-envelope-fill"></i>
-                        <span>Email Application</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item  ">
-                    <a href="application-chat.html" class='sidebar-link'>
-                        <i class="bi bi-chat-dots-fill"></i>
-                        <span>Chat Application</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item  ">
-                    <a href="application-gallery.html" class='sidebar-link'>
-                        <i class="bi bi-image-fill"></i>
-                        <span>Photo Gallery</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item  ">
-                    <a href="application-checkout.html" class='sidebar-link'>
-                        <i class="bi bi-basket-fill"></i>
-                        <span>Checkout Page</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item  has-sub">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-person-badge-fill"></i>
-                        <span>Authentication</span>
-                    </a>
-                    <ul class="submenu ">
-                        <li class="submenu-item ">
-                            <a href="auth-login.html">Login</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="auth-register.html">Register</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="auth-forgot-password.html">Forgot Password</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="sidebar-item  has-sub">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-x-octagon-fill"></i>
-                        <span>Errors</span>
-                    </a>
-                    <ul class="submenu ">
-                        <li class="submenu-item ">
-                            <a href="error-403.html">403</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="error-404.html">404</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="error-500.html">500</a>
-                        </li>
-                    </ul>
-                </li>
 
                 <li class="sidebar-title">Raise Support</li>
 
-                <li class="sidebar-item  ">
-                    <a href="https://zuramai.github.io/mazer/docs" class='sidebar-link'>
-                        <i class="bi bi-life-preserver"></i>
-                        <span>Documentation</span>
-                    </a>
-                </li>
 
-                <li class="sidebar-item  ">
-                    <a href="https://github.com/zuramai/mazer/blob/main/CONTRIBUTING.md" class='sidebar-link'>
-                        <i class="bi bi-puzzle"></i>
-                        <span>Contribute</span>
-                    </a>
-                </li>
+
+
 
                 <li class="sidebar-item  ">
 
                         <form method="POST" action="{{ route('logout') }}" x-data>
                             @csrf
-                                <i class="bi bi-cash"></i>
-                            <x-jet-dropdown-link  href="{{ route('logout') }}"
-                                     @click.prevent="$root.submit();">
-                                     <span> {{ __('Log Out') }}</span>
-                            </x-jet-dropdown-link>
+                            <dt class="the-icon"><span class="fa-fw select-all fas"></span>
+                            <button style="    background: white;
+                            border: 1px solid white;
+                        }" type="submit"> Logout</button>
+                        </dt>
                         </form>
 
                 </li>

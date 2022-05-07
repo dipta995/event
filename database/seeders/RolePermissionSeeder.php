@@ -35,14 +35,47 @@ class RolePermissionSeeder extends Seeder
                 ]
             ],
             [
-                'group_name' => 'blog',
+                'group_name' => 'customer',
                 'permissions' => [
-                    // Blog Permissions
-                    'blog.create',
-                    'blog.view',
-                    'blog.edit',
-                    'blog.delete',
-                    'blog.approve',
+                    // customer Permissions
+                    'customer.create',
+                    'customer.view',
+                    'customer.edit',
+                    'customer.delete',
+                    'customer.approve',
+                ]
+            ],
+            [
+                'group_name' => 'channel',
+                'permissions' => [
+                    // channel Permissions
+                    'channel.create',
+                    'channel.view',
+                    'channel.edit',
+                    'channel.delete',
+                    'channel.approve',
+                ]
+            ],
+            [
+                'group_name' => 'channel_post',
+                'permissions' => [
+                    // channel_post Permissions
+                    'channel_post.create',
+                    'channel_post.view',
+                    'channel_post.edit',
+                    'channel_post.delete',
+                    'channel_post.approve',
+                ]
+            ],
+            [
+                'group_name' => 'package',
+                'permissions' => [
+                    // package Permissions
+                    'package.create',
+                    'package.view',
+                    'package.edit',
+                    'package.delete',
+                    'package.approve',
                 ]
             ],
             [

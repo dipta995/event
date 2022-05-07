@@ -27,11 +27,7 @@ class User extends Authenticatable
      *
      * @var string[]
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -62,6 +58,20 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+
+    public function channel()
+    {
+        return $this->hasOne(Channel::class);
+    }
+    public function replaycomment()
+    {
+        return $this->hasMany(Postreplay::class);
+    }
+    public function notification()
+    {
+        return $this->hasMany(Notification::class);
+    }
 
     public static function getpermissionGroup()
     {

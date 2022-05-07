@@ -1,8 +1,19 @@
 <?php
 
+use App\Http\Controllers\Backend\ChannelController;
+use App\Http\Controllers\Backend\CustomerController;
 use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\PackageController;
 use App\Http\Controllers\Backend\RolesController;
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Livewire\ChannelCreate;
+use App\Http\Livewire\ChannelPostComponent;
+use App\Http\Livewire\Dropdowns;
+use App\Http\Livewire\HomeComponent;
+use App\Http\Livewire\PackageComponent;
+use App\Http\Livewire\PackageDetailsComponent;
+use App\Http\Livewire\PostComponent;
+use App\Http\Livewire\ViewchannelComponent;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,15 +27,33 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/',[DashboardController::class,'index'])->name('home');
     Route::resource('roles', RolesController::class,['names'=>'admin.roles']);
     Route::resource('users', UserController::class,['names'=>'admin.users']);
+    Route::resource('customers', CustomerController::class,['names'=>'admin.customers']);
+    Route::resource('channels', ChannelController::class,['names'=>'admin.channels']);
+    Route::resource('channle-posts', ChannelPostComponent::class,['names'=>'admin.channel.posts']);
+    Route::resource('packages', PackageController::class,['names'=>'admin.packages']);
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+
+
+Route::group(['middleware'=>['auth:sanctum','verified','auth',]],function(){
+    Route::get('/', HomeComponent::class);
+
+    Route::get('/channel/create', ChannelCreate::class);
+    Route::get('channel/{slug}', ViewchannelComponent::class);
+    Route::get('post/{slug}', PostComponent::class);
+    Route::get('/packages', PackageComponent::class);
+    Route::get('package/{slug}', PackageDetailsComponent::class);
+    Route::get('/test1', Dropdowns::class);
+
+});
