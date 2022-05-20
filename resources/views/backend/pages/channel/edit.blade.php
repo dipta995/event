@@ -18,12 +18,12 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
-                           <form action="{{ route('admin.category.update',$category->id) }}" method="POST">
+                           <form action="{{ route('admin.channels.update',$channel->id) }}" method="POST">
                             @method('PUT')
                             @csrf
                             <div class="form-group">
                                 <label for="basicInput">Category Name</label>
-                                <input type="text" name="category_name" class="form-control" id="basicInput" value="{{ $category->category_name }}" >
+                                <input type="text" name="category_name" class="form-control" id="basicInput" value="{{ $channel->name }}" >
                             </div>
 
 

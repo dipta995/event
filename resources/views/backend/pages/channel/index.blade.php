@@ -1,6 +1,6 @@
 @extends('backend.layouts.master')
 @section('title')
-    Category List
+    Rols
 @endsection
 
 @section('admin-content')
@@ -19,6 +19,7 @@
                 <thead>
                     <tr>
                         <th>Sl</th>
+                        <th>Owner</th>
                         <th>Title</th>
 
                         <th>Action</th>
@@ -28,17 +29,18 @@
                 <tbody>
                     <tr>
 
-                        @foreach ($category as $item)
+                        @foreach ($channels as $item)
                             <td>{{ $loop->index+1 }}</td>
-                            <td>{{ $item->category_name }}</td>
+                            <td>{{ $item->user->name }}</td>
+                            <td>{{ $item->name }}</td>
 
 
                             <td>
-                                @if ( Auth::guard('web')->user()->can('category.edit'))
-                                <a class="badge bg-info" href="{{ route('admin.category.edit',$item->id) }}"><i class="fas fa-edit"></i></a>
+                                @if ( Auth::guard('web')->user()->can('channel.edit'))
+                                <a class="badge bg-info" href="{{ route('admin.channels.edit',$item->id) }}"><i class="fas fa-edit"></i></a>
                                 @endif
-                                @if ( Auth::guard('web')->user()->can('category.delete'))
-                                <a class="badge bg-danger" href="{{route('category.destroy', $item->id)}}"><i class="fas fa-trash"></i></a>
+                                @if ( Auth::guard('web')->user()->can('channel.delete'))
+                                <a class="badge bg-danger" href="{{route('admin.channels.destroy', $item->id)}}"><i class="fas fa-trash"></i></a>
                                 @endif
                             </td>
                         </tr>

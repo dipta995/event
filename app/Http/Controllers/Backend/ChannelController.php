@@ -84,9 +84,15 @@ class ChannelController extends Controller
      */
     public function edit($id)
     {
-        if (is_null($this->user) || !$this->user->can('role.edit')) {
+        if (is_null($this->user) || !$this->user->can('channel.edit')) {
             abort(403,'Unauthorized Access');
         }
+        $pageHeader=[
+            'title' => "Channel",
+            'sub_title' => "Channel List"
+        ];
+        $channel = Channel::find($id);
+        return view('backend.pages.channel.edit',compact('channel','pageHeader'));
 
     }
 
