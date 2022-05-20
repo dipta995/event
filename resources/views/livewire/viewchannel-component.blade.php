@@ -16,12 +16,7 @@
 
 
             <figure>
-                @php
-                $channelimage = json_decode($post->channel['image'], true);
-                @endphp
-                @foreach($channelimage as $key=>$imageaa)
-                    <img src="{{ asset('storage/'.$imageaa)}}">
-                @endforeach
+                <img src="{{ asset('storage/'.$mychannel->image)}}">
                 {{-- <img src="{{ $post->channel->image }}" alt=""> --}}
             </figure>
             <div class="friend-name">

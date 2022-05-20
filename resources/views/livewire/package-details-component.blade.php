@@ -3,12 +3,7 @@
         <div class="card-header">
            <div>
             <figure>
-                @php
-                    $channelimage = json_decode($channelinfo['image'], true);
-                    @endphp
-                    @foreach($channelimage as $key=>$imageaa)
-                        <img style="height: " src="{{ asset('storage/'.$imageaa)}}">
-                    @endforeach
+                <img src="{{ asset('storage/'.$package->banner)}}">
             </figure>
                <h3>{{ $channelinfo->name }}</h3>
             </div>

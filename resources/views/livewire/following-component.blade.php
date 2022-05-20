@@ -17,7 +17,7 @@
 
             <li>
                 <figure>
-                    <img src="{{ asset('storage/'.$followings->channell->image)}}">
+                    <img src="{{ asset('storage/'.$followings->channel->image)}}">
                     <span class="status f-online"></span>
                 </figure>
                 <div class="friendz-meta">

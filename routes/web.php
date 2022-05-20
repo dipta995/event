@@ -38,6 +38,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('channels', ChannelController::class,['names'=>'admin.channels']);
     Route::resource('channle-posts', ChannelPostComponent::class,['names'=>'admin.channel.posts']);
     Route::resource('packages', PackageController::class,['names'=>'admin.packages']);
+
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
@@ -55,5 +56,7 @@ Route::group(['middleware'=>['auth:sanctum','verified','auth',]],function(){
     Route::get('/packages', PackageComponent::class);
     Route::get('package/{slug}', PackageDetailsComponent::class);
     Route::get('/test1', Dropdowns::class);
+
+
 
 });

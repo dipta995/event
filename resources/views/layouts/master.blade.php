@@ -413,7 +413,7 @@
 											</li>
 											<li>
 												<i class="ti-files"></i>
-												<a href="fav-page.html" title="">My Channel</a>
+												<a href="{{ url('channel',auth()->user()->channels->slug) }}" title="">My Channel</a>
 											</li>
 											<li>
 												<i class="ti-user"></i>
