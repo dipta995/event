@@ -32,31 +32,32 @@
                 <thead>
                     <tr>
                         <th>Sl</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Roles</th>
+                        <th>Title</th>
+                        <th>Owner Name</th>
+                        <th>Price</th>
+                        <th>Discount</th>
+                        <th>Day</th>
                         <th>Action</th>
 
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        @foreach ($users as $user)
+                        @foreach ($packages as $package)
                             <td>{{ $loop->index+1 }}</td>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->email }}</td>
-                            <td>
-                                @foreach ($user->roles as $item)
-                                <span class="badge bg-success">{{ $item->name }}</span>
-                                @endforeach
-                            </td>
+                            <td>{{ $package->user->name }}</td>
+                            <td>{{ $package->name }}</td>
+                            <td>{{ $package->price }}</td>
+                            <td>{{ $package->discount }} %</td>
+                            <td>{{ $package->day }} </td>
+
 
                             <td>
-                                @if ( Auth::guard('web')->user()->can('admin.edit'))
-                                <a class="badge bg-info" href="{{ route('admin.users.edit',$user->id) }}">Edit</a>
+                                @if ( Auth::guard('web')->user()->can('package.edit'))
+                                <a class="badge bg-info" href="{{ route('admin.packages.edit',$package->id) }}">Edit</a>
                                 @endif
-                                @if ( Auth::guard('web')->user()->can('admin.delete'))
-                                <a class="badge bg-danger" href="{{ route('admin.users.destroy',$user->id) }}">Delete</a>
+                                @if ( Auth::guard('web')->user()->can('package.delete'))
+                                <a class="badge bg-danger" href="{{ route('admin.packages.destroy',$package->id) }}">Delete</a>
                                 @endif
                             </td>
                         </tr>

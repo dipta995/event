@@ -16,8 +16,8 @@
 
 
             <figure>
-                <img src="{{ asset('storage/'.$mychannel->image)}}">
-                {{-- <img src="{{ $post->channel->image }}" alt=""> --}}
+                {{-- <img src="{{ asset('storage/'.$mychannel->image)}}"> --}}
+                <img src="{{ $post->channel->image }}" alt="">
             </figure>
             <div class="friend-name">
                 <ins><a href="{{ url('/channel') }}/{{ $post->channel->slug  }}" title="">{{ $post->channel->name }}</a>
@@ -33,7 +33,7 @@
 
                 <a style="color: white; height: 30px;font-size: 12px;" class="btn btn-danger" href="" wire:click.prevent="addChannelLike({{ $usrid }},{{ $post->channel_id }})"><i class="fa fa-user-plus"></i> Follow</a>
                 @endif
-
+<a href="{{ url('channel-package/'.$post->channel->slug) }}" class="float-right">Package List</a>
                   </ins>
                 <span>published: {!! date('d/M/Y H:i:s', strtotime($post->created_at)) !!}</span>
             </div>

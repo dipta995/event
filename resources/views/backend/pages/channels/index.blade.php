@@ -56,7 +56,7 @@
                                 <a class="badge bg-info" href="{{ route('admin.users.edit',$user->id) }}">Edit</a>
                                 @endif
                                 @if ( Auth::guard('web')->user()->can('admin.delete'))
-                                <a class="badge bg-danger" href="{{ route('admin.users.destroy',$user->id) }}">Delete</a>
+                                <a class="badge bg-danger" href="">Delete</a>
                                 @endif
                             </td>
                         </tr>

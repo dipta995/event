@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\ChannelController;
+use App\Http\Controllers\Backend\ChannelPostController;
 use App\Http\Controllers\Backend\CustomerController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\PackageController;
@@ -12,6 +13,7 @@ use App\Http\Livewire\Dropdowns;
 use App\Http\Livewire\HomeComponent;
 use App\Http\Livewire\PackageComponent;
 use App\Http\Livewire\PackageDetailsComponent;
+use App\Http\Livewire\PackagesForChannel;
 use App\Http\Livewire\PostComponent;
 use App\Http\Livewire\ViewchannelComponent;
 use Illuminate\Support\Facades\Route;
@@ -36,7 +38,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('users', UserController::class,['names'=>'admin.users']);
     Route::resource('customers', CustomerController::class,['names'=>'admin.customers']);
     Route::resource('channels', ChannelController::class,['names'=>'admin.channels']);
-    Route::resource('channle-posts', ChannelPostComponent::class,['names'=>'admin.channel.posts']);
+    Route::resource('channle-posts', ChannelPostController::class,['names'=>'admin.channel.posts']);
     Route::resource('packages', PackageController::class,['names'=>'admin.packages']);
 
 });
@@ -55,6 +57,7 @@ Route::group(['middleware'=>['auth:sanctum','verified','auth',]],function(){
     Route::get('post/{slug}', PostComponent::class);
     Route::get('/packages', PackageComponent::class);
     Route::get('package/{slug}', PackageDetailsComponent::class);
+    Route::get('channel-package/{slug}', PackagesForChannel::class);
     Route::get('/test1', Dropdowns::class);
 
 

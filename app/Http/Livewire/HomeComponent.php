@@ -41,7 +41,7 @@ class HomeComponent extends Component
 else {
     $mychannel = Null;
 }
-        $posts = Post::latest()->paginate($this->perPage);
+        $posts = Post::where('status','published')->latest()->paginate($this->perPage);
         return view('livewire.home-component',compact('posts','mychannel'))->layout('layouts.master');
     }
     public function addPostLike($user_id,$post_id)
@@ -122,7 +122,7 @@ else {
         ]);
         $this->emit('refreshComponent');
 
- 
+
 
 
     }

@@ -51,7 +51,7 @@ if (is_null($channelid)) {
     $posts = Post::where('channel_id',0)->latest()->paginate($this->perPage);
     }
 else{
-    $posts = Post::where('channel_id',$channelid->id)->latest()->paginate($this->perPage);
+    $posts = Post::where('channel_id',$channelid->id)->where('status','published')->latest()->paginate($this->perPage);
 }
 
 

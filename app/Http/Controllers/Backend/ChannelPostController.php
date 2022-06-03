@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,7 +25,15 @@ class ChannelPostController extends Controller
      */
     public function index()
     {
-        //
+        if (is_null($this->user) || !$this->user->can('channel_post.view')) {
+            abort(403,'Unauthorized Access');
+        }
+        $pageHeader=[
+            'title' => "Channel",
+            'sub_title' => "Channel List"
+        ];
+        $channelPost  = Post::all();
+        return view('backend.pages.channelposts.index',compact('channelPost','pageHeader'));
     }
 
     /**
@@ -56,7 +65,16 @@ class ChannelPostController extends Controller
      */
     public function show($id)
     {
-        //
+        if (is_null($this->user) || !$this->user->can('channel_post.view')) {
+            abort(403,'Unauthorized Access');
+        }
+        $pageHeader=[
+            'title' => "Channel",
+            'sub_title' => "Channel List"
+        ];
+        $post = Post::find($id);
+        return view('backend.pages.channelposts.view',compact('post','pageHeader'));
+
     }
 
     /**
@@ -65,10 +83,22 @@ class ChannelPostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request,$id)
     {
-        //
-    }
+        if (is_null($this->user) || !$this->user->can('channel_post.edit')) {
+            abort(403,'Unauthorized Access');
+        }
+        $post = Post::find($id);
+        if ($request->status=='draft') {
+            $post->status = 'published';
+
+        }else{
+            $post->status = 'draft';
+
+        }
+        $post->save();
+        return back()->with('success','Post Unpublished');
+     }
 
     /**
      * Update the specified resource in storage.
@@ -79,7 +109,12 @@ class ChannelPostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if (is_null($this->user) || !$this->user->can('channel_post.edit')) {
+            abort(403,'Unauthorized Access');
+        }
+
+
+
     }
 
     /**

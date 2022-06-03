@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Package;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,7 +25,11 @@ class PackageController extends Controller
      */
     public function index()
     {
-        //
+        if (is_null($this->user) || !$this->user->can('admin.view')) {
+            abort(403,'Unauthorized Access');
+        }
+        $packages = Package::latest()->get();
+        return view('backend.pages.packages.index',compact('packages'));
     }
 
     /**

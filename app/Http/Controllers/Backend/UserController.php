@@ -30,7 +30,7 @@ class UserController extends Controller
         if (is_null($this->user) || !$this->user->can('admin.view')) {
             abort(403,'Unauthorized Access');
         }
-        $users = User::all();
+        $users = User::where('role','admin')->get();
         return view('backend.pages.users.index',compact('users'));
     }
 

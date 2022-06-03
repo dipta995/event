@@ -34,7 +34,7 @@
                         <th>Sl</th>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>Roles</th>
+                        <th>Phone</th>
                         <th>Action</th>
 
                     </tr>
@@ -45,18 +45,15 @@
                             <td>{{ $loop->index+1 }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
-                            <td>
-                                @foreach ($user->roles as $item)
-                                <span class="badge bg-success">{{ $item->name }}</span>
-                                @endforeach
-                            </td>
+                            <td>{{ $user->phone }}</td>
+
 
                             <td>
-                                @if ( Auth::guard('web')->user()->can('admin.edit'))
-                                <a class="badge bg-info" href="{{ route('admin.users.edit',$user->id) }}">Edit</a>
+                                @if ( Auth::guard('web')->user()->can('customer.edit'))
+                                <a class="badge bg-info" href="{{ route('admin.customers.edit',$user->id) }}">Edit</a>
                                 @endif
-                                @if ( Auth::guard('web')->user()->can('admin.delete'))
-                                <a class="badge bg-danger" href="{{ route('admin.users.destroy',$user->id) }}">Delete</a>
+                                @if ( Auth::guard('web')->user()->can('customer.delete'))
+                                <a class="badge bg-danger" href="{{ route('admin.customers.destroy',$user->id) }}">Delete</a>
                                 @endif
                             </td>
                         </tr>

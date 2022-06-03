@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="" />
     <meta name="keywords" content="" />
-	<title>Winku Social Network Toolkit</title>
+	<title>Winku </title>
     <link rel="icon" href="{{ asset('user/images/fav.png') }}" type="image/png" sizes="16x16">
 
     <link rel="stylesheet" href="{{ asset('user/css/main.min.css') }}">
@@ -44,11 +44,10 @@
 			<ul>
 				<li><span>Home</span>
 					<ul>
-						<li><a href="index-2.html" title="">Home Social</a></li>
-						<li><a href="index2.html" title="">Home Social 2</a></li>
+
 						<li><a href="index-company.html" title="">Home Company</a></li>
 						<li><a href="landing.html" title="">Login page</a></li>
-						<li><a href="logout.html" title="">Logout Page</a></li>
+						<li><a href="" title="">Logout Page</a></li>
 						<li><a href="newsfeed.html" title="">news feed</a></li>
 					</ul>
 				</li>
@@ -445,8 +444,13 @@
 												<a href="insights.html" title="">insights</a>
 											</li> -->
 											<li>
-												<i class="ti-power-off"></i>
-												<a href="landing.html" title="">Logout</a>
+
+                                            <form method="POST" action="{{ route('logout') }}">
+                                            @csrf
+                                            <i class="ti-power-off"></i>
+                                       <input style="background: #fff;border:2px solid #fff; color:#03658c;" type="submit" name="Logout" id="">
+                                        </form>
+
 
 											</li>
 										</ul>

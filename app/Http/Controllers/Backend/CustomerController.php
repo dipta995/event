@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class CustomerController extends Controller
 {
@@ -18,16 +19,18 @@ class CustomerController extends Controller
             return $next($request);
         });
     }
-    /**
+  /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        
-        $customers = User::all();
-
+        if (is_null($this->user) || !$this->user->can('customer.view')) {
+            abort(403,'Unauthorized Access');
+        }
+        $users = User::where('role','user')->get();
+        return view('backend.pages.customers.index',compact('users'));
     }
 
     /**
@@ -37,7 +40,10 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        if (is_null($this->user) || !$this->user->can('customer.create')) {
+            abort(403,'Unauthorized Access');
+        }
+        return view('backend.pages.customers.create');
     }
 
     /**
@@ -48,7 +54,35 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (is_null($this->user) || !$this->user->can('customer.create')) {
+            abort(403,'Unauthorized Access');
+        }
+        $request->validate([
+            'name'=> 'required|max:50',
+            'email'=> 'required|unique:users',
+            'password'=> 'required|min:8|confirmed',
+        ],[
+            'name.required' => 'Please Insert New User Name'
+        ]);
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->role = 'user';
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        session()->flash('success','Customer hasBeen created');
+        return redirect()->route('admin.customers.index');
+
+
+        // $user = User::create(['name' => $request->name]);
+        // $permissions = $request->permissions;
+        // if ($user) {
+        //     if (!empty($permissions)) {
+        //         $user->syncPermissions($permissions);
+        //     }
+        //     return back()->with('success','New User Created');
+        // }
     }
 
     /**
@@ -70,7 +104,11 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        //
+        if (is_null($this->user) || !$this->user->can('customer.edit')) {
+            abort(403,'Unauthorized Access');
+        }
+        $user = User::find($id);
+        return view('backend.pages.customers.edit',compact('user'));
     }
 
     /**
@@ -82,7 +120,29 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if (is_null($this->user) || !$this->user->can('customer.edit')) {
+            abort(403,'Unauthorized Access');
+        }
+
+        $user = User::find($id);
+        $request->validate([
+            'name'=> 'required|max:50',
+            'email'=> 'required|email|unique:users,email,'.$id,
+            'password'=> 'nullable|min:8|confirmed',
+        ],[
+            'name.required' => 'Please Insert New User Name'
+        ]);
+        // $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        if ($request->password !=null) {
+            $user->password = Hash::make($request->password);
+        }
+        $user->save();
+
+        session()->flash('success','User has Been Updated');
+        return back();
+
     }
 
     /**
@@ -93,6 +153,16 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (is_null($this->user) || !$this->user->can('customer.delete')) {
+            abort(403,'Unauthorized Access');
+        }
+         $user = User::findById($id);
+         if (!is_null($user)) {
+             $user->delete();
+         }
+         session()->flash('success','user has been deleted');
+         return back();
+
     }
 }
+
