@@ -101,6 +101,28 @@ class RolePermissionSeeder extends Seeder
                 ]
             ],
             [
+                'group_name' => 'channel_payment',
+                'permissions' => [
+                    // role Permissions
+                    'channel_payment.create',
+                    'channel_payment.view',
+                    'channel_payment.edit',
+                    'channel_payment.delete',
+                    'channel_payment.approve',
+                ]
+            ],
+            [
+                'group_name' => 'package_order',
+                'permissions' => [
+                    // role Permissions
+                    'package_order.create',
+                    'package_order.view',
+                    'package_order.edit',
+                    'package_order.delete',
+                    'package_order.approve',
+                ]
+            ],
+            [
                 'group_name' => 'profile',
                 'permissions' => [
                     // profile Permissions
