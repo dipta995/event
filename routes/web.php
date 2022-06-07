@@ -8,13 +8,17 @@ use App\Http\Controllers\Backend\PackageController;
 use App\Http\Controllers\Backend\RolesController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Livewire\ChannelCreate;
+use App\Http\Livewire\ChannelPaymentComponent;
 use App\Http\Livewire\ChannelPostComponent;
 use App\Http\Livewire\Dropdowns;
 use App\Http\Livewire\HomeComponent;
+use App\Http\Livewire\MyPackageOrderComponent;
 use App\Http\Livewire\PackageComponent;
 use App\Http\Livewire\PackageDetailsComponent;
+use App\Http\Livewire\PackagePaymentComponent;
 use App\Http\Livewire\PackagesForChannel;
 use App\Http\Livewire\PostComponent;
+use App\Http\Livewire\RattingComponent;
 use App\Http\Livewire\ViewchannelComponent;
 use Illuminate\Support\Facades\Route;
 
@@ -54,9 +58,13 @@ Route::group(['middleware'=>['auth:sanctum','verified','auth',]],function(){
 
     Route::get('/channel/create', ChannelCreate::class);
     Route::get('channel/{slug}', ViewchannelComponent::class);
+    Route::get('channel/payment/{userid}', ChannelPaymentComponent::class);
     Route::get('post/{slug}', PostComponent::class);
     Route::get('/packages', PackageComponent::class);
     Route::get('package/{slug}', PackageDetailsComponent::class);
+    Route::get('packages/{id}', MyPackageOrderComponent::class);
+    Route::get('package/ratting/{id}', RattingComponent::class);
+    Route::get('package/payment/{id}', PackagePaymentComponent::class);
     Route::get('channel-package/{slug}', PackagesForChannel::class);
     Route::get('/test1', Dropdowns::class);
 

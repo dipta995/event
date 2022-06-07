@@ -405,6 +405,10 @@
 												<i class="ti-clipboard"></i>
 												<a href="newsfeed.html" title="">News feed</a>
 											</li> -->
+                                            <li>
+												<i class="ti-mouse-alt"></i>
+												<a href="{{ url('packages',Auth::user()->id) }}" title="">Package History</a>
+											</li>
 											@if (auth()->user()->channel=='yes')
 											<li>
 												<i class="ti-mouse-alt"></i>

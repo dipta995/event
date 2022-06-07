@@ -64,6 +64,10 @@ class User extends Authenticatable
     {
         return $this->hasOne(Channel::class);
     }
+    public function channelSingle()
+    {
+        return $this->hasOne(Channel::class);
+    }
     public function channels()
     {
         return $this->hasOne(Channel::class,"user_id","id","name");

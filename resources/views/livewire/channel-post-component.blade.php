@@ -13,33 +13,25 @@
                 <textarea wire:model="post_text" rows="2" placeholder="write something"></textarea>
                 <div class="attachments">
                     <ul>
-                        {{-- <li>
-                            <i class="fa fa-music"></i>
-                            <label class="fileContainer">
-                                <input type="file">
-                            </label>
-                        </li> --}}
+                       
                         <li>
                             <i class="fa fa-image"></i>
                             <label class="fileContainer">
                                 <input wire:model="images" multiple type="file">
                             </label>
                         </li>
-                        {{-- <li>
-                            <i class="fa fa-video-camera"></i>
-                            <label class="fileContainer">
-                                <input type="file">
-                            </label>
-                        </li> --}}
-                        {{-- <li>
-                            <i class="fa fa-camera"></i>
-                            <label class="fileContainer">
-                                <input type="file">
-                            </label>
-                        </li> --}}
+
+                        @if (auth()->user()->channelSingle->status==1)
+
                         <li>
                             <button type="submit">Post</button>
                         </li>
+                        @else
+                        <li>
+                            <p>Before Post Please Pay....</p>
+                            <a class="btn btn-info" href="{{ url('channel/payment',Auth::user()->id) }}">Pay 1000 Taka</a>
+                        </li>
+                        @endif
                     </ul>
                 </div>
             </form>
