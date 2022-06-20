@@ -410,10 +410,14 @@
 												<a href="{{ url('packages',Auth::user()->id) }}" title="">Package History</a>
 											</li>
 											@if (auth()->user()->channel=='yes')
-											<li>
-												<i class="ti-mouse-alt"></i>
-												<a href="{{ url('packages') }}" title="">My Package</a>
-											</li>
+                                            <li>
+                                                <i class="ti-mouse-alt"></i>
+                                                <a href="{{ url('packages') }}" title="">My Package</a>
+                                            </li>
+                                            <li>
+                                                <i class="ti-mouse-alt"></i>
+                                                <a href="{{ url('packages/order') }}" title="">Order History</a>
+                                            </li>
 											<li>
 												<i class="ti-files"></i>
 												<a href="{{ url('channel',auth()->user()->channels->slug) }}" title="">My Channel</a>

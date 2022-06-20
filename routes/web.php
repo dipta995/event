@@ -15,6 +15,7 @@ use App\Http\Livewire\HomeComponent;
 use App\Http\Livewire\MyPackageOrderComponent;
 use App\Http\Livewire\PackageComponent;
 use App\Http\Livewire\PackageDetailsComponent;
+use App\Http\Livewire\PackageOrderComponent;
 use App\Http\Livewire\PackagePaymentComponent;
 use App\Http\Livewire\PackagesForChannel;
 use App\Http\Livewire\PostComponent;
@@ -62,6 +63,7 @@ Route::group(['middleware'=>['auth:sanctum','verified','auth',]],function(){
     Route::get('post/{slug}', PostComponent::class);
     Route::get('/packages', PackageComponent::class);
     Route::get('package/{slug}', PackageDetailsComponent::class);
+    Route::get('packages/order', PackageOrderComponent::class);
     Route::get('packages/{id}', MyPackageOrderComponent::class);
     Route::get('package/ratting/{id}', RattingComponent::class);
     Route::get('package/payment/{id}', PackagePaymentComponent::class);

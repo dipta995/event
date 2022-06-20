@@ -216,7 +216,7 @@
            <div class="content-wrapper">
 
               {{ $slot }}
-          </div> 
+          </div>
 
 
           <!-- content-wrapper ends -->

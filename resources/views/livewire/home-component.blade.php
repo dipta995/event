@@ -1,7 +1,53 @@
 <div>
-
     @livewire('channel-post-component')
+    <div class="card">
+        <div class="card-body">
+            <form action="" method="GET">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <select wire:model="selectedDivision" class="form-control">
+                            <option value="" selected>Choose state</option>
+                            @foreach ($divisions as $division)
+                                <option value="{{ $division->id }}">{{ $division->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('selectedDivision')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    @if (!is_null($selectedDivision))
+                        <div class="form-group">
+                            <select class="form-control" wire:model="district"
+                                name="district_id">
+                                <option value="" selected>Choose district</option>
+                                @foreach ($districts as $district)
+                                    <option value="{{ $district->id }}">
+                                        {{ $district->name }}</option>
+                                @endforeach
+                            </select>
 
+                        </div>
+
+                    @endif
+                    @error('district_id')
+                        <span class="error">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="col-md-12">
+                    <input wire:model="text" class="form-control"  type="text">
+                </div>
+                <div class="col-md-12">
+                    <br>
+                    <button class="btn-info">Search</button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
 <div class="loadMor">
 @php
     $i=0;
@@ -11,6 +57,7 @@
     $i++;
 @endphp
 <div class="central-meta item">
+
     <div class="user-post">
         <div class="friend-info">
 
@@ -29,10 +76,10 @@
 
                 @endphp
                 @if ($channellike->count()>0)
-                <a style="color: white; height: 30px;font-size: 12px;" class="btn btn-secondary"  wire:click.prevent="removeChannelLike({{ $usrid }},{{ $post->channel_id }})" href="#"><i class="fa fa-undo"></i> Unfollow</a>
+                <a style="color: white; height: 30px;font-size: 12px;" class="btn btn-secondary"  wire:click.prevent="removeChannelLike({{ $usrid }},{{ $post->channel_id }})" href="#"> <i class="fa fa-undo"></i></a>
                 @else
 
-                <a style="color: white; height: 30px;font-size: 12px;" class="btn btn-danger" href="" wire:click.prevent="addChannelLike({{ $usrid }},{{ $post->channel_id }})"><i class="fa fa-user-plus"></i> Follow</a>
+                <a style="color: white; height: 30px;font-size: 12px;" class="btn btn-danger" href="" wire:click.prevent="addChannelLike({{ $usrid }},{{ $post->channel_id }})"> <i class="fa fa-bell"></i></a>
                 @endif
 
                   </ins>

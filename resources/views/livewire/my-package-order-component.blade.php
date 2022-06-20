@@ -13,9 +13,8 @@
         </thead>
         <tbody>
           <tr>
-            <th scope="row">1</th>
-            @foreach ($data as $item)
-
+              @foreach ($data as $key=>$item)
+            <th scope="row">{{ $key+1 }}</th>
             <td>{{ $item->package->name }}</td>
             <td>{{ $item->amount }}</td>
             <td>{{ $item->account_no }}</td>
@@ -28,9 +27,9 @@
             @else
             <td>{{ $item->ratting }}</td>
             @endif
-            @endforeach
 
-          </tr>
+        </tr>
+        @endforeach
         </tbody>
     </table>
 </div>

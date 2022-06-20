@@ -45,8 +45,8 @@
                     <tr>
                         @foreach ($packages as $package)
                             <td>{{ $loop->index+1 }}</td>
-                            <td>{{ $package->user->name }}</td>
                             <td>{{ $package->name }}</td>
+                            <td>{{ $package->user->name }}</td>
                             <td>{{ $package->price }}</td>
                             <td>{{ $package->discount }} %</td>
                             <td>{{ $package->day }} </td>
