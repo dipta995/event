@@ -36,20 +36,19 @@ class HomeComponent extends Component
     public $comment;
     public function resetcomment()
     {
-        $this->comment=' ';
+        $this->comment = ' ';
     }
     public function render()
     {
 
-        if (auth()->user()->channel=='yes') {
+        if (auth()->user()->channel == 'yes') {
 
-            $mychannel = Channel::where('user_id',auth()->user()->id)->first();
+            $mychannel = Channel::where('user_id', auth()->user()->id)->first();
+        } else {
+            $mychannel = Null;
         }
-else {
-    $mychannel = Null;
-}
-        $posts = Post::where('status','published')->latest()->paginate($this->perPage);
-        return view('livewire.home-component',compact('posts','mychannel'))->layout('layouts.master');
+        $posts = Post::where('status', 'published')->latest()->paginate($this->perPage);
+        return view('livewire.home-component', compact('posts', 'mychannel'))->layout('layouts.master');
     }
     public function mount()
     {
@@ -62,100 +61,91 @@ else {
             $this->districts = District::where('division_id', $division)->get();
         }
     }
-    public function addPostLike($user_id,$post_id)
+    public function addPostLike($user_id, $post_id)
     {
 
-        $usrid=auth()->user()->id;
+        $usrid = auth()->user()->id;
 
 
-        $postlike = Postlike::where('user_id',$usrid)->where('post_id',$post_id)->where('like','no');
-        if ($postlike->count()>0) {
+        $postlike = Postlike::where('user_id', $usrid)->where('post_id', $post_id)->where('like', 'no');
+        if ($postlike->count() > 0) {
             Postlike::where('user_id', $user_id)->where('post_id', $post_id)
-        ->update([
-            'like' =>'yes'
-         ]);
-        }else{
+                ->update([
+                    'like' => 'yes'
+                ]);
+        } else {
             $send = Postlike::create([
                 'user_id' => $user_id,
                 'post_id' => $post_id,
-                'like'=>"yes"
+                'like' => "yes"
             ]);
         }
 
 
 
-            //session()->flash('message','Student Created');
+        //session()->flash('message','Student Created');
 
-            //$this->resetInputField();
-            //$this->emit('studentAdded');
+        //$this->resetInputField();
+        //$this->emit('studentAdded');
 
 
     }
-    public function removePostLike($user_id,$post_id)
+    public function removePostLike($user_id, $post_id)
     {
         Postlike::where('user_id', $user_id)->where('post_id', $post_id)
-        ->update([
-            'like' =>'no'
-         ]);
+            ->update([
+                'like' => 'no'
+            ]);
     }
 
     public function addcomment($postid)
     {
         $userid = auth()->user()->id;
 
-       Postcomment::create([
+        Postcomment::create([
             'user_id' => $userid,
             'post_id' => $postid,
-            'comment'=>$this->comment,
+            'comment' => $this->comment,
         ]);
         $this->resetcomment();
     }
 
-    public function addChannelLike($user_id,$channel_id)
+    public function addChannelLike($user_id, $channel_id)
     {
-dd($this->district_id);
-        $usrid=auth()->user()->id;
-        $channellike = Channellike::where('user_id',$usrid)->where('channel_id',$channel_id)->where('like','no');
-        if ($channellike->count()>0) {
+        dd($this->district_id);
+        $usrid = auth()->user()->id;
+        $channellike = Channellike::where('user_id', $usrid)->where('channel_id', $channel_id)->where('like', 'no');
+        if ($channellike->count() > 0) {
             Channellike::where('user_id', $user_id)->where('channel_id', $channel_id)
-            ->update([
-            'like' =>'yes'
-         ]);
-        }else{
+                ->update([
+                    'like' => 'yes'
+                ]);
+        } else {
             $send = Channellike::create([
                 'user_id' => $user_id,
                 'channel_id' => $channel_id,
-                'like'=>"yes"
+                'like' => "yes"
             ]);
         }
-        $reciverid = Channel::where('id',$channel_id)->first();
+        $reciverid = Channel::where('id', $channel_id)->first();
 
         Notification::create([
             'user_id' => $reciverid->user_id,
             'channel_id' => $channel_id,
-            'reciver'=>"admin",
-            'link'=>"#",
-            'read'=>"no",
-            'brif'=>"you have new Subscription"
+            'reciver' => "admin",
+            'link' => "#",
+            'read' => "no",
+            'brif' => "you have new Subscription"
         ]);
         $this->emit('refreshComponent');
-
-
-
-
     }
 
-    public function removeChannelLike($user_id,$channel_id)
+    public function removeChannelLike($user_id, $channel_id)
     {
         Channellike::where('user_id', $user_id)->where('channel_id', $channel_id)
-        ->update([
-            'like' =>'no'
-         ]);
-         $this->emit('refreshComponent');
+            ->update([
+                'like' => 'no'
+            ]);
+        $this->emit('refreshComponent');
     }
-
-
-
-
-
 }
