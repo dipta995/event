@@ -116,7 +116,7 @@
                         <li>
                             <span class="comment" data-toggle="tooltip" title="Comments">
                                 <i class="fa fa-comments-o"></i>
-                                <ins>52</ins>
+                                <ins>{{ $post->comment->count() }}</ins>
                             </span>
                         </li>
                         <li>
@@ -212,10 +212,13 @@
                                         <!-- Contenedor del Comentario -->
                                         <div class="comment-box">
                                             <div class="comment-head">
-                                                <h6 class="comment-name by-author"><a href="http://creaticode.com/blog">Agustin Ortiz</a></h6>
-                                                <span>hace 20 minutos</span>
-                                                <i class="fa fa-reply"></i>
-                                                <i class="fa fa-heart"></i>
+                                                <h6 class="comment-name"><a href="#"> {{ $comments->user->name }}</a></h6>
+                                                <span> {{ $comments->created_at }}</span>
+{{--                                                <i class="fa fa-reply"></i>--}}
+{{--                                                <i class="fa fa-heart"></i>--}}
+                                                @if ( auth()->user()->id == $comments->user->id )
+                                                    <a wire:click.prevent="commentdelete({{ $comments->id }})" href="#" class="btn"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                                @endif
                                             </div>
                                             <div class="comment-content">
                                                 {{ $comments->comment }}
@@ -238,8 +241,8 @@
                                                 <div class="comment-head">
                                                     <h6 class="comment-name"><a href="http://creaticode.com/blog">Lorena Rojero</a></h6>
                                                     <span>hace 10 minutos</span>
-                                                    <i class="fa fa-reply"></i>
-                                                    <i class="fa fa-heart"></i>
+{{--                                                    <i class="fa fa-reply"></i>--}}
+{{--                                                    <i class="fa fa-heart"></i>--}}
                                                 </div>
                                                 <div class="comment-content">
                                                     {{ $replays->replay }}
@@ -424,8 +427,8 @@ body {
  * Caja del Comentario
  ---------------------------*/
 .comments-list .comment-box {
-	width: 680px;
-	float: right;
+	width: 500px;
+	float: left;
 	position: relative;
 	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.15);
 	-moz-box-shadow: 0 1px 1px rgba(0,0,0,0.15);

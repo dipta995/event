@@ -8,7 +8,7 @@
         <div class="friend-info">
             <figure>
                 @php
-                $channelimage = json_decode($post->channel['image'], true);
+                $channelimage = json_decode(collect($post->channel['image']), true);
                 @endphp
                 @foreach($channelimage as $key=>$imageaa)
 
@@ -150,7 +150,7 @@
                          </div>
 
                         <div class="comments-container">
-                            <h4>Comments({{ $post->comment->count() }}) </h1>
+                            <h4>Comments({{ $post->comment->count() }}) </h4>
 
 
 
@@ -170,8 +170,7 @@
                                                 <h6 class="comment-name"><a href="#"> {{ $comments->user->name }}</a></h6>
                                                 <span> {{ $comments->created_at }}</span>
                                                 @if ( auth()->user()->id == $comments->user->id )
-
-                                                <a wire:click.prevent="commentdelete({{ $comments->id }})" href="#"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                                <a wire:click.prevent="commentdelete({{ $comments->id }})" href="#" class="btn"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                                 @endif
 
 
@@ -390,8 +389,8 @@ body {
  * Caja del Comentario
  ---------------------------*/
 .comments-list .comment-box {
-	width: 680px;
-	float: right;
+	width: 500px;
+	float: left;
 	position: relative;
 	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.15);
 	-moz-box-shadow: 0 1px 1px rgba(0,0,0,0.15);

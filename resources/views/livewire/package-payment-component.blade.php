@@ -3,7 +3,7 @@
             <div class="card-body ">
                 <form class="form-group payment" action="">
                    <div class="form-control">
-                       <input type="text" wire:model="package_id">
+                       <input type="hidden" wire:model="package_id">
                         <label for="">Payable Ammount :</label>
                         <input type="hidden" class="form-control"  readonly  wire:model="amount">
                         <strong style="color: red;">{{ $data->price-(($data->price*$data->discount)/100) }} Taka</strong>
@@ -28,11 +28,11 @@
                 </div>
                 <div class="form-control">
                     <label for="">From Date</label>
-                    <input type="text" class="form-control" wire:model="from_date">
+                    <input type="date" class="form-control" wire:model="from_date">
                 </div>
                 <div class="form-control">
                     <label for="">Day</label>
-                    <input type="text" class="form-control" wire:model="day">
+                    <input type="text" readonly class="form-control" wire:model="day">
                 </div>
 
                     <input wire:click.prevent="ChannelPayment" type="submit" class="btn btn-success" value="Confirm">

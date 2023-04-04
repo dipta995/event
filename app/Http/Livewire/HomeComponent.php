@@ -112,7 +112,7 @@ class HomeComponent extends Component
 
     public function addChannelLike($user_id, $channel_id)
     {
-        dd($this->district_id);
+//        dd($this->district_id);
         $usrid = auth()->user()->id;
         $channellike = Channellike::where('user_id', $usrid)->where('channel_id', $channel_id)->where('like', 'no');
         if ($channellike->count() > 0) {
