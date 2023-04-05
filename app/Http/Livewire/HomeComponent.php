@@ -55,6 +55,10 @@ class HomeComponent extends Component
         $this->divisions = Division::all();
         $this->districts = collect();
     }
+    public function commentdelete($commentid)
+    {
+        Postcomment::where('id', $commentid)->delete();
+    }
     public function updatedSelectedDivision($division)
     {
         if (!is_null($division)) {

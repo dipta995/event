@@ -13,4 +13,5 @@ class MyPackageOrderComponent extends Component
         $data = PackageOrder::where('user_id',Auth::user()->id)->get();
         return view('livewire.my-package-order-component',compact('data'))->layout('layouts.master');
     }
+
 }

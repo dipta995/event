@@ -1,9 +1,10 @@
 <div class="card">
     <div class="card-body ">
         <form class="form-group payment" action="">
-        <input type="text" wire:model="order_id">
+        <input type="hidden" wire:model="order_id">
         <div class="form-control">
             <select class="from-controll select" wire:model="ratting" id="">
+                <option value="">--Choose Ratting--</option>
                 <option value="5">5</option>
                 <option value="4">4</option>
                 <option value="3">3</option>

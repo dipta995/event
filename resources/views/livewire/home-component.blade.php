@@ -196,8 +196,6 @@
 
 
                         <div id="demo{{ $i }}" class="comments-container collapse">
-                            <h1>Comments</h1>
-
 
 
 

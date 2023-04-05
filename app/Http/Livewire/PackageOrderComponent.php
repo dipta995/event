@@ -15,4 +15,18 @@ class PackageOrderComponent extends Component
         $data = PackageOrder::leftJoin('packages','packages.id','package_orders.package_id')->where('packages.user_id',Auth::user()->id)->get();
         return view('livewire.package-order-component',compact('data'))->layout('layouts.master');
     }
+
+    public function approvePAckage($id)
+    {
+        $pack =   PackageOrder::find($id);
+        $pack->status = 1;
+        $pack->save();
+    }
+
+    public function rejectPAckage($id)
+    {
+        $pack =   PackageOrder::find($id);
+        $pack->status = 2;
+        $pack->save();
+    }
 }

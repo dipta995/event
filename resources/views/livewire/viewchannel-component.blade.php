@@ -68,7 +68,7 @@
                         <li>
                             <span class="comment" data-toggle="tooltip" title="Comments">
                                 <i class="fa fa-comments-o"></i>
-                                <ins>52</ins>
+                                <ins>{{ $post->comment->count() }}</ins>
                             </span>
                         </li>
                         <li>
@@ -144,42 +144,44 @@
         <div class="coment-area">
             <ul class="we-comet">
 
-                        <!-- Contenedor Principal -->
+                <!-- Contenedor Principal -->
 
 
-                        <div id="demo{{ $i }}" class="comments-container collapse">
-                            <h1>Comments</h1>
+                <div id="demo{{ $i }}" class="comments-container collapse">
 
 
 
 
-                            <ul id="comments-list" class="comments-list">
-                                @foreach ($post->comment as $comments)
+                    <ul id="comments-list" class="comments-list">
+                        @foreach ($post->comment as $comments)
 
 
-                                <li>
-                                    <div class="comment-main-level">
-                                        <!-- Avatar -->
-                                        <div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg" alt=""></div>
-                                        <!-- Contenedor del Comentario -->
-                                        <div class="comment-box">
-                                            <div class="comment-head">
-                                                <h6 class="comment-name by-author"><a href="http://creaticode.com/blog">Agustin Ortiz</a></h6>
-                                                <span>hace 20 minutos</span>
-                                                <i class="fa fa-reply"></i>
-                                                <i class="fa fa-heart"></i>
-                                            </div>
-                                            <div class="comment-content">
-                                                {{ $comments->comment }}
-                                            </div>
+                            <li>
+                                <div class="comment-main-level">
+                                    <!-- Avatar -->
+                                    <div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg" alt=""></div>
+                                    <!-- Contenedor del Comentario -->
+                                    <div class="comment-box">
+                                        <div class="comment-head">
+                                            <h6 class="comment-name"><a href="#"> {{ $comments->user->name }}</a></h6>
+                                            <span> {{ $comments->created_at }}</span>
+                                            {{--                                                <i class="fa fa-reply"></i>--}}
+                                            {{--                                                <i class="fa fa-heart"></i>--}}
+                                            @if ( auth()->user()->id == $comments->user->id )
+                                                <a wire:click.prevent="commentdelete({{ $comments->id }})" href="#" class="btn"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                            @endif
+                                        </div>
+                                        <div class="comment-content">
+                                            {{ $comments->comment }}
                                         </div>
                                     </div>
-                                    <!-- Respuestas de los comentarios -->
-                                    <ul class="comments-list reply-list">
+                                </div>
+                                <!-- Respuestas de los comentarios -->
+                                <ul class="comments-list reply-list">
                                     @php
                                         $allcomment = DB::table('postreplays')->where('comment_id',$comments->id)->get();
                                     @endphp
-                                        @foreach ($allcomment as $replays)
+                                    @foreach ($allcomment as $replays)
 
 
                                         <li>
@@ -190,25 +192,25 @@
                                                 <div class="comment-head">
                                                     <h6 class="comment-name"><a href="http://creaticode.com/blog">Lorena Rojero</a></h6>
                                                     <span>hace 10 minutos</span>
-                                                    <i class="fa fa-reply"></i>
-                                                    <i class="fa fa-heart"></i>
+                                                    {{--                                                    <i class="fa fa-reply"></i>--}}
+                                                    {{--                                                    <i class="fa fa-heart"></i>--}}
                                                 </div>
                                                 <div class="comment-content">
                                                     {{ $replays->replay }}
                                                 </div>
                                             </div>
                                         </li>
-                                            @endforeach
+                                    @endforeach
 
 
-                                    </ul>
-                                </li>
-                                @endforeach
+                                </ul>
+                            </li>
+                        @endforeach
 
-                            </ul>
-                        </div>
+                    </ul>
+                </div>
 
-                        <!-- Contenedor Principal -->
+                <!-- Contenedor Principal -->
 
 
             </ul>
@@ -376,8 +378,8 @@ body {
  * Caja del Comentario
  ---------------------------*/
 .comments-list .comment-box {
-	width: 680px;
-	float: right;
+	width: 500px;
+	float: left;
 	position: relative;
 	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.15);
 	-moz-box-shadow: 0 1px 1px rgba(0,0,0,0.15);

@@ -20,14 +20,23 @@
             <td>{{ $item->account_no }}</td>
             <td>{{ $item->from_date }}</td>
             <td>{{ $item->day }}</td>
-            @if ($item->status == 0)
-            <td>
-                <a href="{{ url('package/ratting',$item->id) }}">Ratting </a>
-            </td>
-            @else
-            <td>{{ $item->ratting }}</td>
-            @endif
-
+                  <td>
+                      @php
+                          $date = \Carbon::parse($item->from_date);
+                          $fourDaysLater = $date->addDays($item->day);
+                      @endphp
+                      @if (date('Y-m-d') > $fourDaysLater)
+                              <a href="{{ url('package/ratting',$item->id) }}">Ratting </a>
+                      @else
+                          @if ($item->status == 1)
+                              <a href="{{ url('package/ratting',$item->id) }}">Ratting </a>
+                          @elseif($item->status == 2)
+                              <a href="#">Rejected </a>
+                          @else
+                              <a href="#">Pending </a>
+                          @endif
+                      @endif
+                  </td>
         </tr>
         @endforeach
         </tbody>
