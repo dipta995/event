@@ -116,4 +116,10 @@ class PostComponent extends Component
          $this->emit('refreshComponent');
     }
 
+    public function deletePost($postId){
+        $row = Post::find($postId);
+        $row->delete();
+        return $this->redirectRoute('customer.home');
+
+    }
 }

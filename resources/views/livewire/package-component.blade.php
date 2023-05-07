@@ -1,6 +1,7 @@
 <div>
     @if (auth()->user()->channel=='yes')
     <div class="card">
+        <a wire:click="resetFields()" class="btn btn-dark float-right">Create New</a>
         <div class="card-body">
             @error('post_text') <span class=" alert-danger">{{ $message }}</span> @enderror
 
@@ -8,6 +9,7 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">Name</label>
                     <input type="text"  wire:model="name" class="form-control" placeholder="Package name">
+                    <input type="hidden"  wire:model="packageID" class="form-control" placeholder="Package name">
                 </div>
                 <div class="row">
                     <div class="col-md-4">
@@ -71,7 +73,8 @@
                     <textarea  wire:model="description" id="" cols="2" rows="5"  class="form-control"></textarea>
                 </div>
 
-                <button type="submit" wire:click.prevent="createpackage" class="btn btn-primary">Submit</button>
+                <button type="submit" {{($updatePackage == false) ? "" : "disabled"}} wire:click.prevent="createpackage" class="btn btn-primary">Submit</button>
+                <button type="submit" {{($updatePackage == true) ? "" : "disabled"}} wire:click.prevent="updatePackage" class="btn btn-primary">Update</button>
 
             </form>
         </div>
@@ -83,6 +86,7 @@
                 @foreach ($data as $item)
                 <div class="col-xs-12 col-sm-6">
                     <div class="card">
+                        <a wire:click="editPackage({{$item->id}})" class="btn btn-dark float-right">Edit</a>
                         <a class="img-card" href="">
                         <img src="{{ asset('storage/'.$item->banner)}}" />
                       </a>

@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
-{
+{    protected $fillable = ['channel_id','post_text','slug','tags','status'];
+
     use HasFactory;
-    protected $fillable = ['channel_id','post_text','slug','tags','status'];
 
     public function postllike()
     {
@@ -19,7 +19,7 @@ class Post extends Model
     {
         return $this->hasMany(Postcomment::class);
     }
-    
+
 
     public function postimage()
     {

@@ -422,19 +422,19 @@
 												<i class="ti-files"></i>
 												<a href="{{ url('channel',auth()->user()->channels->slug) }}" title="">My Channel</a>
 											</li>
-											<li>
-												<i class="ti-user"></i>
-												<a href="timeline-friends.html" title="">Subscribers</a>
-											</li>
-											<li>
-												<i class="ti-video-camera"></i>
-												<a href="timeline-videos.html" title="">Photos</a>
-											</li>
+{{--											<li>--}}
+{{--												<i class="ti-user"></i>--}}
+{{--												<a href="timeline-friends.html" title="">Subscribers</a>--}}
+{{--											</li>--}}
+{{--											<li>--}}
+{{--												<i class="ti-video-camera"></i>--}}
+{{--												<a href="timeline-videos.html" title="">Photos</a>--}}
+{{--											</li>--}}
 											@endif
-											<li>
-												<i class="ti-image"></i>
-												<a href="timeline-photos.html" title="">Subscribe list</a>
-											</li>
+{{--											<li>--}}
+{{--												<i class="ti-image"></i>--}}
+{{--												<a href="timeline-photos.html" title="">Subscribe list</a>--}}
+{{--											</li>--}}
 											<!-- <li>
 												<i class="ti-comments-smiley"></i>
 												<a href="messages.html" title="">Messages</a>

@@ -34,50 +34,7 @@ class RolePermissionSeeder extends Seeder
                     'dashboard.edit',
                 ]
             ],
-            [
-                'group_name' => 'customer',
-                'permissions' => [
-                    // customer Permissions
-                    'customer.create',
-                    'customer.view',
-                    'customer.edit',
-                    'customer.delete',
-                    'customer.approve',
-                ]
-            ],
-            [
-                'group_name' => 'channel',
-                'permissions' => [
-                    // channel Permissions
-                    'channel.create',
-                    'channel.view',
-                    'channel.edit',
-                    'channel.delete',
-                    'channel.approve',
-                ]
-            ],
-            [
-                'group_name' => 'channel_post',
-                'permissions' => [
-                    // channel_post Permissions
-                    'channel_post.create',
-                    'channel_post.view',
-                    'channel_post.edit',
-                    'channel_post.delete',
-                    'channel_post.approve',
-                ]
-            ],
-            [
-                'group_name' => 'package',
-                'permissions' => [
-                    // package Permissions
-                    'package.create',
-                    'package.view',
-                    'package.edit',
-                    'package.delete',
-                    'package.approve',
-                ]
-            ],
+
             [
                 'group_name' => 'admin',
                 'permissions' => [
@@ -101,6 +58,17 @@ class RolePermissionSeeder extends Seeder
                 ]
             ],
             [
+                'group_name' => 'report',
+                'permissions' => [
+                    // report Permissions
+                    'report.create',
+                    'report.view',
+                    'report.edit',
+                    'report.delete',
+                    'report.approve',
+                ]
+            ],
+            [
                 'group_name' => 'channel_payment',
                 'permissions' => [
                     // role Permissions
@@ -108,20 +76,9 @@ class RolePermissionSeeder extends Seeder
                     'channel_payment.view',
                     'channel_payment.edit',
                     'channel_payment.delete',
-                    'channel_payment.approve',
                 ]
             ],
-            [
-                'group_name' => 'package_order',
-                'permissions' => [
-                    // role Permissions
-                    'package_order.create',
-                    'package_order.view',
-                    'package_order.edit',
-                    'package_order.delete',
-                    'package_order.approve',
-                ]
-            ],
+
             [
                 'group_name' => 'profile',
                 'permissions' => [
