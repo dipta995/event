@@ -21,6 +21,9 @@ class HomeComponent extends Component
     public $text;
     public $districts;
     public $district;
+    public $district_id;
+    public $division_id;
+    public $search;
     public $selectedDivision = NULL;
     //pagination zone
     public $perPage = 5;
@@ -40,20 +43,23 @@ class HomeComponent extends Component
     }
     public function render()
     {
-
         if (auth()->user()->channel == 'yes') {
 
             $mychannel = Channel::where('user_id', auth()->user()->id)->first();
         } else {
             $mychannel = Null;
         }
-        $posts = Post::where('status', 'published')->latest()->paginate($this->perPage);
+            $posts = Post::where('status', 'published')->latest()->paginate($this->perPage);
         return view('livewire.home-component', compact('posts', 'mychannel'))->layout('layouts.master');
     }
     public function mount()
     {
         $this->divisions = Division::all();
         $this->districts = collect();
+        $this->division_id = request()->division_id;
+        $this->district_id = request()->district_id;
+        $this->search = request()->search;
+
     }
     public function commentdelete($commentid)
     {

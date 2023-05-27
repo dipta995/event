@@ -1,4 +1,7 @@
 <div>
+    <style>
+        .error{color: red;}
+    </style>
     @if (auth()->user()->channel=='yes')
     <div class="card">
         <a wire:click="resetFields()" class="btn btn-dark float-right">Create New</a>
@@ -10,12 +13,18 @@
                     <label for="exampleInputEmail1">Name</label>
                     <input type="text"  wire:model="name" class="form-control" placeholder="Package name">
                     <input type="hidden"  wire:model="packageID" class="form-control" placeholder="Package name">
+                    @error('name')
+                    <span class="error">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Price</label>
                             <input type="number"  wire:model="price" class="form-control" min="1" step="1" placeholder="Enter price">
+                            @error('price')
+                            <span class="error">{{ $message }}</span>
+                            @enderror
                         </div>
 
                     </div>
@@ -23,6 +32,9 @@
                         <div class="form-group">
                             <label for="exampleInputEmail1">Discount</label>
                             <input type="number"  wire:model="discount" class="form-control" min="0" step="1" placeholder="Enter discount">
+                            @error('discount')
+                            <span class="error">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -30,6 +42,9 @@
                         <div class="form-group">
                             <label for="exampleInputEmail1">Day</label>
                             <input type="number"  wire:model="day" class="form-control" min="1" step="1" placeholder="Enter discount">
+                            @error('day')
+                            <span class="error">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -38,7 +53,10 @@
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input"  wire:model="banner" id="inputGroupFile04">
                                 <label class="custom-file-label" for="inputGroupFile04">Choose Banner</label>
-                              </div>
+                                @error('banner')
+                                <span class="error">{{ $message }}</span>
+                                @enderror
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -47,6 +65,9 @@
                             <div class="custom-file">
                                 <input type="file" multiple  wire:model="images" class="custom-file-input" id="inputGroupFile04">
                                 <label class="custom-file-label" for="inputGroupFile04">Choose images</label>
+                                @error('images')
+                                <span class="error">{{ $message }}</span>
+                                @enderror
                               </div>
                         </div>
                         <div wire:loading wire:target="images" style="color: green;">Uploading...</div>
@@ -71,6 +92,9 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">Description</label>
                     <textarea  wire:model="description" id="" cols="2" rows="5"  class="form-control"></textarea>
+                    @error('description')
+                    <span class="error">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <button type="submit" {{($updatePackage == false) ? "" : "disabled"}} wire:click.prevent="createpackage" class="btn btn-primary">Submit</button>

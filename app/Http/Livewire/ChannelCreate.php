@@ -18,16 +18,17 @@ class ChannelCreate extends Component
     public $phone;
     public $address;
     public $divisions;
+    public $phonevalidate = '/^(?=.{11}$)(01)\d+$/';
     public $districts;
     public $images;
     use WithFileUploads;
     public $selectedDivision = NULL;
     protected $rules = [
         'name' => 'required|min:6',
-        'phone' => 'digits:11|unique:channels',
+        'phone' => 'digits:11|unique:channels|regex:/^(?=.{11}$)(01)\d+$/',
         'address' => 'required',
-        'images' => 'image|max:1024',
-        'divisions' => 'required|min:6',
+        'images' => 'image|max:1024|mimes:jpeg,jpg,png,gif|required|max:10000',
+        'divisions' => 'required',
         'districts' => 'required',
     ];
     public function mount()

@@ -19,7 +19,7 @@ class PackageDetailsComponent extends Component
     public function render()
     {
         $package = Package::where('slug',$this->slug)->first();
-        $channelinfo = Channel::where('id',$package->user_id)->first();
+        $channelinfo = Channel::where('user_id',$package->user_id)->first();
         return view('livewire.package-details-component',compact('package','channelinfo'))->layout('layouts.master');
     }
 }

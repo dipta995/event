@@ -30,7 +30,7 @@ else {
     public function addpost($channelid)
     {
         $this->validate([
-            'post_text'=>'required',
+            'post_text'=>'required|max:300',
             'images.*' => 'image|max:1024',
         ]);
         $slug = slugify($this->post_text);

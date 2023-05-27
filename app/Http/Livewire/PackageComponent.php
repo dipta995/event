@@ -41,7 +41,7 @@ class PackageComponent extends Component
             'name' => 'required',
             'price' => 'required',
             'day' => 'required|min:1',
-            'description' => 'required',
+            'description' => 'required|max:200',
             'banner' => 'image|max:1024',
         ]);
         $usrid = auth()->user()->id;

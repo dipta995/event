@@ -18,8 +18,8 @@ class ChannelPaymentComponent extends Component
     public $to_date;
     protected $rules = [
         'payment_type' => 'required',
-        'account_no' => 'digits:11|required',
-        'ref' => 'required',
+        'account_no' => 'digits:11|required|regex:/^(?=.{11}$)(01)\d+$/',
+        'ref' => 'required|max:4',
     ];
     public function mount()
     {

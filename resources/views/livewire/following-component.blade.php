@@ -3,13 +3,7 @@
         <h4 class="widget-title">FollowIng</h4>
         <div style="    padding: 0 20px;
     }">
-            <form class="filterform" action="#">
-                <input style="border: 1px solid #eaeaea;
-                color: #575757;
-                font-size: 14px;
-                padding: 5px 10px;
-                width: 100%;" class="filterinput" type="text" placeholder="Search Contacts...">
-            </form>
+
         </div>
         <ul id="people-list" class="friendz-list">
             @foreach ($following as $followings)
@@ -21,7 +15,7 @@
                     <span class="status f-online"></span>
                 </figure>
                 <div class="friendz-meta">
-                    <a href="time-line.html">{{ $followings->channel->name }}</a>
+                    <a href="">{{ $followings->channel->name }}</a>
                     {{-- <i><a href="" class="__cf_email__" data-cfemail="a0d7c9ced4c5d2d3cfccc4c5d2e0c7cdc1c9cc8ec3cfcd">[email&#160;protected]</a></i> --}}
                 </div>
             </li>

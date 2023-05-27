@@ -1,53 +1,53 @@
 <div>
     @livewire('channel-post-component')
-    <div class="card">
-        <div class="card-body">
-            <form action="" method="GET">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <select wire:model="selectedDivision" class="form-control">
-                                <option value="" selected>Choose state</option>
-                                @foreach ($divisions as $division)
-                                    <option value="{{ $division->id }}">{{ $division->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            @error('selectedDivision')
-                            <span class="error">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        @if (!is_null($selectedDivision))
-                            <div class="form-group">
-                                <select class="form-control" wire:model="district"
-                                        name="district_id">
-                                    <option value="" selected>Choose district</option>
-                                    @foreach ($districts as $district)
-                                        <option value="{{ $district->id }}">
-                                            {{ $district->name }}</option>
-                                    @endforeach
-                                </select>
+    {{--    <div class="card">--}}
+    {{--        <div class="card-body">--}}
+    {{--            <form action="" method="GET">--}}
+    {{--                <div class="row">--}}
+    {{--                    <div class="col-md-6">--}}
+    {{--                        <div class="form-group">--}}
+    {{--                                <select wire:model="selectedDivision" name="division_id" class="form-control">--}}
+    {{--                                <option value="" selected>Choose state</option>--}}
+    {{--                                @foreach ($divisions as $division)--}}
+    {{--                                    <option value="{{ $division->id }}">{{ $division->name }}--}}
+    {{--                                    </option>--}}
+    {{--                                @endforeach--}}
+    {{--                            </select>--}}
+    {{--                            @error('selectedDivision')--}}
+    {{--                            <span class="error">{{ $message }}</span>--}}
+    {{--                            @enderror--}}
+    {{--                        </div>--}}
+    {{--                    </div>--}}
+    {{--                    <div class="col-md-6">--}}
+    {{--                        @if (!is_null($selectedDivision))--}}
+    {{--                            <div class="form-group">--}}
+    {{--                                <select class="form-control" wire:model="district"--}}
+    {{--                                        name="district_id">--}}
+    {{--                                    <option value="" selected>Choose district</option>--}}
+    {{--                                    @foreach ($districts as $district)--}}
+    {{--                                        <option value="{{ $district->id }}">--}}
+    {{--                                            {{ $district->name }}</option>--}}
+    {{--                                    @endforeach--}}
+    {{--                                </select>--}}
 
-                            </div>
+    {{--                            </div>--}}
 
-                        @endif
-                        @error('district_id')
-                        <span class="error">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="col-md-12">
-                        <input wire:model="text" class="form-control" type="text">
-                    </div>
-                    <div class="col-md-12">
-                        <br>
-                        <button class="btn-info">Search</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
+    {{--                        @endif--}}
+    {{--                        @error('district_id')--}}
+    {{--                        <span class="error">{{ $message }}</span>--}}
+    {{--                        @enderror--}}
+    {{--                    </div>--}}
+    {{--                    <div class="col-md-12">--}}
+    {{--                        <input wire:model="text" name="search" class="form-control" type="text">--}}
+    {{--                    </div>--}}
+    {{--                    <div class="col-md-12">--}}
+    {{--                        <br>--}}
+    {{--                        <button class="btn-info">Search</button>--}}
+    {{--                    </div>--}}
+    {{--                </div>--}}
+    {{--            </form>--}}
+    {{--        </div>--}}
+    {{--    </div>--}}
     <div class="loadMor">
         @php
             $i=0;
@@ -88,19 +88,19 @@
                                             class="fa fa-bell"></i></a>
                                 @endif
                                 @if($channelOwner = \App\Models\Channel::where('user_id',auth()->id())->first())
-                                @if($channelOwner->id == $post->channel_id)
-                                    <a style="color: white; height: 30px;font-size: 12px;"
-                                       class="btn btn-danger float-right" href="{{ route('edit.post',$post->id) }}"><i
-                                            class="fa fa-user-plus"></i> Edit</a>
-                                    <a style="color: white; height: 30px;font-size: 12px;"
-                                       class="btn btn-danger float-right"
-                                       wire:click.prevent="deletePost({{ $post->id }})"><i
-                                            class="fa fa-trash"></i> Delete</a>
-                                @else
-                                    <a style="color: white; height: 30px;font-size: 12px;"
-                                       class="btn btn-danger float-right" href="{{ route('report',$post->id) }}"><i
-                                            class="fa fa-user-plus"></i> Report</a>
-                                @endif
+                                    @if($channelOwner->id == $post->channel_id)
+                                        <a style="color: white; height: 30px;font-size: 12px;"
+                                           class="btn btn-danger float-right" href="{{ route('edit.post',$post->id) }}"><i
+                                                class="fa fa-user-plus"></i> Edit</a>
+                                        <a style="color: white; height: 30px;font-size: 12px;"
+                                           class="btn btn-danger float-right"
+                                           wire:click.prevent="deletePost({{ $post->id }})"><i
+                                                class="fa fa-trash"></i> Delete</a>
+                                    @else
+                                        <a style="color: white; height: 30px;font-size: 12px;"
+                                           class="btn btn-danger float-right" href="{{ route('report',$post->id) }}"><i
+                                                class="fa fa-user-plus"></i> Report</a>
+                                    @endif
                                 @else
                                     <a style="color: white; height: 30px;font-size: 12px;"
                                        class="btn btn-danger float-right" href="{{ route('report',$post->id) }}"><i
@@ -173,45 +173,6 @@
                                             <ins>200</ins>
                                         </span>
                                     </li> --}}
-                                    <li class="social-media">
-                                        <div class="menu">
-                                            <div class="btn trigger"><i class="fa fa-share-alt"></i></div>
-                                            <div class="rotater"></div>
-                                            <div class="rotater">
-                                                <div class="btn btn-icon"><a href="#" title=""><i
-                                                            class="fa fa-facebook"></i></a></div>
-                                            </div>
-                                            <div class="rotater">
-                                                <div class="btn btn-icon"><a href="#" title=""><i
-                                                            class="fa fa-twitter"></i></a></div>
-                                            </div>
-                                            <div class="rotater">
-                                                <div class="btn btn-icon"><a href="#" title=""><i
-                                                            class="fa fa-instagram"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="rotater"></div>
-                                            {{-- <div class="rotater">
-                                                <div class="btn btn-icon"><a href="#" title=""><i class="fa fa-css3"></i></a></div>
-                                              </div>
-
-                                              <div class="rotater">
-                                                  <div class="btn btn-icon"><a href="#" title=""><i class="fa fa-dribbble"></i></a>
-                                                  </div>
-                                              </div>
-                                              <div class="rotater">
-                                                <div class="btn btn-icon"><a href="#" title=""><i class="fa fa-google-plus"></i></a></div>
-                                              </div>
-                                            <div class="rotater">
-                                              <div class="btn btn-icon"><a href="#" title=""><i class="fa fa-pinterest"></i></a>
-                                              </div>
-                                            </div>
-                                            <div class="rotater">
-                                              <div class="btn btn-icon"><a href="#" title=""><i class="fa fa-html5"></i></a></div>
-                                            </div> --}}
-
-                                        </div>
-                                    </li>
                                     <a href="#demo{{ $i }}" data-toggle="collapse">view Comment</a>
                                     <a style="float: right;" href="{{ url('post/'.$post->slug) }}">See more</a>
                                 </ul>
