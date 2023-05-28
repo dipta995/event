@@ -37,9 +37,7 @@
                                 <td>
                                     @if ( Auth::guard('web')->user()->can('report.edit'))
 
-                                        <a class="badge bg-info"
-                                           href="{{ route('admin.channel.payments.edit',$item->id) }}"><i
-                                                class="fas fa-edit"></i></a>
+
                                     @endif
                                     @if ( Auth::guard('web')->user()->can('report.delete'))
                                         <a class="badge bg-danger"
