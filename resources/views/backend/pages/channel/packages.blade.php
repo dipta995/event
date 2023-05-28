@@ -32,10 +32,10 @@
                             <td>{{ $item->discount }} %</td>
                             <td>{{ $item->day }}</td>
                             <td>
-                                @if ( Auth::guard('web')->user()->can('channel.edit'))
+                                @if ( Auth::guard('web')->user()->can('package_order.edit'))
                                     <a class="badge bg-info" href="{{ route('package.orders',$item->id) }}"><i class="fas fa-book"></i></a>
                                 @endif
-                                @if ( Auth::guard('web')->user()->can('channel.delete'))
+                                @if ( Auth::guard('web')->user()->can('package.delete'))
                                     <a class="badge bg-danger" href="{{route('packages.delete', $item->id)}}"><i class="fas fa-trash"></i></a>
                                 @endif
                             </td>

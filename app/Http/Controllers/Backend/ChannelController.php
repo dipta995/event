@@ -128,13 +128,16 @@ class ChannelController extends Controller
         if (is_null($this->user) || !$this->user->can('role.delete')) {
             abort(403, 'Unauthorized Access');
         }
+        $row = Channel::find($id);
+        $row->delete();
+        return back();
     }
 
 //    Packages
 
     public function packages($user_id)
     {
-        if (is_null($this->user) || !$this->user->can('channel.view')) {
+        if (is_null($this->user) || !$this->user->can('package.view')) {
             abort(403, 'Unauthorized Access');
         }
         $data['pageHeader'] = [
@@ -152,6 +155,9 @@ class ChannelController extends Controller
 
     public function deletePackage($id)
     {
+        if (is_null($this->user) || !$this->user->can('package.delete')) {
+            abort(403, 'Unauthorized Access');
+        }
         $row = Package::find($id);
         $row->delete();
         return back();
@@ -160,6 +166,9 @@ class ChannelController extends Controller
 
     public function deleteOrder($id)
     {
+        if (is_null($this->user) || !$this->user->can('package_order.delete')) {
+            abort(403, 'Unauthorized Access');
+        }
         $row = PackageOrder::find($id);
         $row->delete();
         return back();
@@ -168,7 +177,7 @@ class ChannelController extends Controller
 
     public function packageOrders($package_id)
     {
-        if (is_null($this->user) || !$this->user->can('channel.view')) {
+        if (is_null($this->user) || !$this->user->can('package_order.view')) {
             abort(403, 'Unauthorized Access');
         }
         $data['pageHeader'] = [

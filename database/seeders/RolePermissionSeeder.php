@@ -20,8 +20,6 @@ class RolePermissionSeeder extends Seeder
         // Create Roles
         $roleSuperAdmin = Role::create(['name' => 'superadmin']);
         $roleAdmin = Role::create(['name' => 'admin']);
-        $roleEditor = Role::create(['name' => 'editor']);
-        $roleUser = Role::create(['name' => 'user']);
 
 
         // Permission List as array
@@ -31,19 +29,6 @@ class RolePermissionSeeder extends Seeder
                 'group_name' => 'dashboard',
                 'permissions' => [
                     'dashboard.view',
-                    'dashboard.edit',
-                ]
-            ],
-
-            [
-                'group_name' => 'admin',
-                'permissions' => [
-                    // admin Permissions
-                    'admin.create',
-                    'admin.view',
-                    'admin.edit',
-                    'admin.delete',
-                    'admin.approve',
                 ]
             ],
             [
@@ -61,20 +46,40 @@ class RolePermissionSeeder extends Seeder
                 'group_name' => 'report',
                 'permissions' => [
                     // report Permissions
-                    'report.create',
                     'report.view',
-                    'report.edit',
                     'report.delete',
-                    'report.approve',
                 ]
             ],
+            [
+                'group_name' => 'channel',
+                'permissions' => [
+                    // role Permissions
+                    'channel.view',
+                    'channel.delete',
+                ]
+            ],
+            [
+                'group_name' => 'package',
+                'permissions' => [
+                    // role Permissions
+                    'package.view',
+                    'package.delete',
+                ]
+            ],
+            [
+                'group_name' => 'package_order',
+                'permissions' => [
+                    // role Permissions
+                    'package_order.view',
+                    'package_order.delete',
+                ]
+            ],
+
             [
                 'group_name' => 'channel_payment',
                 'permissions' => [
                     // role Permissions
-                    'channel_payment.create',
                     'channel_payment.view',
-                    'channel_payment.edit',
                     'channel_payment.delete',
                 ]
             ],

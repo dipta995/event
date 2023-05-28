@@ -33,20 +33,20 @@ class UserSeeder extends Seeder
             $user->password = Hash::make('12345678');
             $user->save();
         }
-        foreach(range(1,20) as $index)
-        {
-            User::create([
-                "name"=>$faker->name,
-                "email"=>$faker->email,
-                "phone"=>$faker->phoneNumber,
-                "address"=>$faker->address,
-                "district"=>"Bhola",
-                "channel"=>"no",
-                "role"=>"admin",
-                'profile_photo_path'=>$faker->imageUrl,
-                "password"=>bcrypt("12345678"),
-
-            ]);
-        }
+//        foreach(range(1,20) as $index)
+//        {
+//            User::create([
+//                "name"=>$faker->name,
+//                "email"=>$faker->email,
+//                "phone"=>$faker->phoneNumber,
+//                "address"=>$faker->address,
+//                "district"=>"Bhola",
+//                "channel"=>"no",
+//                "role"=>"admin",
+//                'profile_photo_path'=>$faker->imageUrl,
+//                "password"=>bcrypt("12345678"),
+//
+//            ]);
+//        }
     }
 }

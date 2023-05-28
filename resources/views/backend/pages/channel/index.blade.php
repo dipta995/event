@@ -31,7 +31,7 @@
                             <td>{{ $item->user->name }}</td>
                             <td>{{ $item->name }}</td>
                             <td>
-                                @if ( Auth::guard('web')->user()->can('channel.edit'))
+                                @if ( Auth::guard('web')->user()->can('package.view'))
                                     <a class="badge bg-info" href="{{ route('packages',$item->user_id) }}"><i class="fas fa-book"></i></a>
                                 @endif
                                 @if ( Auth::guard('web')->user()->can('channel.delete'))
@@ -42,9 +42,7 @@
                         @empty
                             <tr>
                                 <td colspan="2"></td>
-                                <td colspan="6">No Data Found! <a class="btn btn-outline-info"
-                                                                  href="{{ $pageHeader['create_route'] }}">Create
-                                        {{ $pageHeader['singular_name'] }}</a>
+                                <td colspan="6">No Data Found! </a>
                                 </td>
                                 <td colspan="2"></td>
                             </tr>
