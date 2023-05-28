@@ -79,7 +79,7 @@ Route::group(['middleware'=>['auth:sanctum','verified','auth',]],function(){
     Route::get('/channel/create', ChannelCreate::class);
     Route::get('channel/{slug}', ViewchannelComponent::class);
     Route::get('channel/payment/{userid}', ChannelPaymentComponent::class);
-    Route::get('post/{slug}', PostComponent::class);
+    Route::get('post/{slug}', PostComponent::class)->name('post-details');
     Route::get('post/edit/{id}', EditPostComponent::class)->name('edit.post');
     Route::get('/packages', PackageComponent::class);
     Route::get('package/{slug}', PackageDetailsComponent::class);

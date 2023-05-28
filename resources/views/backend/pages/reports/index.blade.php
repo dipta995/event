@@ -1,10 +1,8 @@
 @extends('backend.layouts.master')
 @section('title')
-    Rols
+    Report
 @endsection
-
 @section('admin-content')
-
     @include('backend.layouts.partials.page-header', $pageHeader)
     <div class="page-content">
         <!-- Basic Tables start -->
@@ -22,11 +20,9 @@
                             <th>Report By</th>
                             <th>Comment</th>
                             <th>Action</th>
-
                         </tr>
                         </thead>
                         <tbody>
-
                         @foreach ($reports as $item)
                             <tr>
                                 <td>{{ $loop->index+1 }}</td>
@@ -35,14 +31,13 @@
                                         <p>{{ $item->post->post_text }}</p>
                                         <a href="#" class="read-more">Read </a>
                                     </div>
-
                                 </td>
                                 <td>{{ $item->users->name }}</td>
-
                                 <td>{{ $item->comment }}</td>
-
                                 <td>
-                                    @if ( Auth::guard('web')->user()->can('report.edit'))
+                                    <a class="badge bg-info" href="{{ route('post-details',$item->post->slug) }}"><i
+                                            class="fas fa-eye"></i></a>
+                                    @if ( Auth::guard('web')->user()->can('report.view'))
                                         @if ($item->post->status == 'published')
                                             <a class="badge bg-dark" href="{{ route('admin.reports.edit',[$item->post_id,'status=draft']) }}"><i
                                                     class="fas fa-lock"></i></a>
@@ -59,7 +54,6 @@
                             </tr>
                         @endforeach
                         {!! $reports->links() !!}
-
                         </tbody>
                     </table>
                 </div>
@@ -88,9 +82,7 @@
                     $(this).text($(this).text() == 'Read ' ? 'Hide' : 'Read');
                 });
             </script>
-
         </section>
         <!-- Basic Tables end -->
     </div>
-
 @endsection
