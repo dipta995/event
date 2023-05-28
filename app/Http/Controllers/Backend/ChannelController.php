@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Channel;
+use App\Models\Package;
+use App\Models\PackageOrder;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 
 class ChannelController extends Controller
@@ -13,11 +16,13 @@ class ChannelController extends Controller
 
     public function __construct()
     {
-        $this->middleware(function($request,$next){
+        $this->middleware(function ($request, $next) {
             $this->user = Auth::guard('web')->user();
             return $next($request);
         });
+        Paginator::useBootstrapFive();
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -26,14 +31,14 @@ class ChannelController extends Controller
     public function index()
     {
         if (is_null($this->user) || !$this->user->can('channel.view')) {
-            abort(403,'Unauthorized Access');
+            abort(403, 'Unauthorized Access');
         }
-        $pageHeader=[
+        $pageHeader = [
             'title' => "Channel",
             'sub_title' => "Channel List"
         ];
-        $channels  = Channel::all();
-        return view('backend.pages.channel.index',compact('channels','pageHeader'));
+        $channels = Channel::paginate(10);
+        return view('backend.pages.channel.index', compact('channels', 'pageHeader'));
 
     }
 
@@ -45,7 +50,7 @@ class ChannelController extends Controller
     public function create()
     {
         if (is_null($this->user) || !$this->user->can('role.create')) {
-            abort(403,'Unauthorized Access');
+            abort(403, 'Unauthorized Access');
         }
 
     }
@@ -53,13 +58,13 @@ class ChannelController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         if (is_null($this->user) || !$this->user->can('role.create')) {
-            abort(403,'Unauthorized Access');
+            abort(403, 'Unauthorized Access');
         }
 
 
@@ -68,7 +73,7 @@ class ChannelController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -79,34 +84,34 @@ class ChannelController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         if (is_null($this->user) || !$this->user->can('channel.edit')) {
-            abort(403,'Unauthorized Access');
+            abort(403, 'Unauthorized Access');
         }
-        $pageHeader=[
+        $pageHeader = [
             'title' => "Channel",
             'sub_title' => "Channel List"
         ];
         $channel = Channel::find($id);
-        return view('backend.pages.channel.edit',compact('channel','pageHeader'));
+        return view('backend.pages.channel.edit', compact('channel', 'pageHeader'));
 
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         if (is_null($this->user) || !$this->user->can('role.edit')) {
-            abort(403,'Unauthorized Access');
+            abort(403, 'Unauthorized Access');
         }
 
 
@@ -115,16 +120,64 @@ class ChannelController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         if (is_null($this->user) || !$this->user->can('role.delete')) {
-            abort(403,'Unauthorized Access');
+            abort(403, 'Unauthorized Access');
         }
+    }
 
+//    Packages
+
+    public function packages($user_id)
+    {
+        if (is_null($this->user) || !$this->user->can('channel.view')) {
+            abort(403, 'Unauthorized Access');
+        }
+        $data['pageHeader'] = [
+            'title' => "Package",
+            'sub_title' => "Package List"
+        ];
+        $data['packages'] = Package::where('user_id', $user_id)->paginate(10);
+        return view('backend.pages.channel.packages', $data);
+    }
+
+    public function editPackage($id)
+    {
 
     }
+
+    public function deletePackage($id)
+    {
+        $row = Package::find($id);
+        $row->delete();
+        return back();
+
+    }
+
+    public function deleteOrder($id)
+    {
+        $row = PackageOrder::find($id);
+        $row->delete();
+        return back();
+
+    }
+
+    public function packageOrders($package_id)
+    {
+        if (is_null($this->user) || !$this->user->can('channel.view')) {
+            abort(403, 'Unauthorized Access');
+        }
+        $data['pageHeader'] = [
+            'title' => "Package Order",
+            'sub_title' => "Package Order List"
+        ];
+        $data['orders'] = PackageOrder::where('package_id', $package_id)->paginate(10);
+        return view('backend.pages.channel.orders', $data);
+    }
+
 }
 

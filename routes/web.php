@@ -59,6 +59,11 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('channels', ChannelController::class,['names'=>'admin.channels']);
     Route::resource('channle-posts', ChannelPostController::class,['names'=>'admin.channel.posts']);
     Route::resource('packages', PackageController::class,['names'=>'admin.packages']);
+    Route::get('channel/packages/{user_id}', [ChannelController::class,'packages'])->name('packages');
+    Route::get('channel/packages/edit/{user_id}', [ChannelController::class,'editPackage'])->name('packages.edit');
+    Route::get('channel/packages/delete/{id}', [ChannelController::class,'deletePackage'])->name('packages.delete');
+    Route::get('channel/packages/order/delete/{id}', [ChannelController::class,'deleteOrder'])->name('packages.order.delete');
+    Route::get('channel/packages/order/{package_id}', [ChannelController::class,'packageOrders'])->name('package.orders');
 
 });
 

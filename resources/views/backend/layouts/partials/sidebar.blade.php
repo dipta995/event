@@ -88,7 +88,29 @@
 
 
 
-                {{-- Report --}}
+                {{-- Channel --}}
+                @if ( $userGuard->can('channel.view') || $userGuard->can('channel.create') || $userGuard->can('channel.edit') || $userGuard->can('channel.delete'))
+                    <li class="sidebar-item  has-sub">
+                        <a href="#" class='sidebar-link'>
+                            <i class="bi bi-stack"></i>
+                            <span>Channel's</span>
+                        </a>
+                        <ul class="submenu" {{ Route::is('admin.channels.create') || Route::is('admin.channels.edit') || Route::is('admin.channels.index') ? 'style=display:block;' : '' }} >
+                            <li class="submenu-item ">
+                                @if ( $userGuard->can('channel.view'))
+                                    <a {{  Route::is('admin.channels.edit') || Route::is('admin.channels.index') ? 'style=color:#435ebe;' : '' }}  href="{{ route('admin.channels.index') }}">Channel's</a>
+                                @endif
+{{--                                @if ( $userGuard->can('channel.create'))--}}
+{{--                                    <a {{  Route::is('admin.channel.payments.create') ? 'style=color:#435ebe;' : '' }} href="{{ route('admin.channel.payments.create') }}">Create Channel Payment's</a>--}}
+{{--                                @endif--}}
+                            </li>
+                        </ul>
+                    </li>
+                @endif
+
+
+
+ {{-- Channel Payment --}}
                 @if ( $userGuard->can('channel_payment.view') || $userGuard->can('channel_payment.create') || $userGuard->can('channel_payment.edit') || $userGuard->can('channel_payment.delete'))
                     <li class="sidebar-item  has-sub">
                         <a href="#" class='sidebar-link'>
