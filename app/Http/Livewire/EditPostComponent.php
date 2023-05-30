@@ -52,7 +52,7 @@ class EditPostComponent extends Component
             $up->image = $updatedImages;
 //            dd($up);
             $up->save();
-        return back();
+            return redirect('/post/edit/'.$this->postId);
         }
 
 
