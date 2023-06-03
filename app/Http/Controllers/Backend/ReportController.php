@@ -33,8 +33,8 @@ class ReportController extends Controller
             abort(403,'Unauthorized Access');
         }
         $data['pageHeader']=[
-            'title' => "Channel",
-            'sub_title' => "Channel List"
+            'title' => "Post Report",
+            'sub_title' => "Post Report List"
         ];
         $data['reports'] = PostReport::with('users:id,name','post')->orderBy('id','DESC')->paginate(10);
         return view('backend.pages.reports.index',$data);

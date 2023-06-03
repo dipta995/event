@@ -31,7 +31,7 @@
            <footer>
             <div class="footer clearfix mb-0 text-muted">
                 <div class="float-start">
-                    <p>{{ date('Y') }} &copy; Dipta</p>
+                    <p>{{ date('Y') }} &copy; Event management</p>
                 </div>
                 <div class="float-end">
 

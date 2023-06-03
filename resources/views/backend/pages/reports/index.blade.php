@@ -9,7 +9,7 @@
         <section class="section">
             <div class="card">
                 <div class="card-header">
-                    Report Table
+                    Post Report's
                 </div>
                 <div class="card-body">
                     <table class="table" id="table1">
