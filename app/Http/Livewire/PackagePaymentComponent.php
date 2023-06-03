@@ -23,7 +23,7 @@ class PackagePaymentComponent extends Component
     protected $rules = [
         'payment_type' => 'required',
         'account_no' => 'digits:11|required',
-        'from_date' => 'required',
+        'from_date' => 'required|after:today',
     ];
     public function mount($id)
     {
@@ -47,7 +47,10 @@ class PackagePaymentComponent extends Component
 
     {
         $this->validate();
+        if (Package::where('id',$this->package_id)->where('user_id',\auth()->id())->first()){
+            session()->flash('error', 'You can not buy this package as a owner !.');
 
+        }else{
         PackageOrder::create([
             'package_id'=>$this->package_id,
             'user_id'=> Auth::user()->id,
@@ -59,8 +62,8 @@ class PackagePaymentComponent extends Component
             'day'=>$this->day,
 
         ]);
-
             return redirect('/');
+        }
 
 
 

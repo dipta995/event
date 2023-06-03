@@ -12,7 +12,8 @@ class PackageOrderComponent extends Component
     public function render()
     {
         Package::where('user_id',Auth::user()->id)->get();
-        $data = PackageOrder::leftJoin('packages','packages.id','package_orders.package_id')->where('packages.user_id',Auth::user()->id)->get();
+        $data = PackageOrder::with('package')->where('user_id',Auth::user()->id)->get();
+
         return view('livewire.package-order-component',compact('data'))->layout('layouts.master');
     }
 
@@ -21,6 +22,7 @@ class PackageOrderComponent extends Component
         $pack =   PackageOrder::find($id);
         $pack->status = 1;
         $pack->save();
+        return back();
     }
 
     public function rejectPAckage($id)

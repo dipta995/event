@@ -85,6 +85,7 @@ Route::group(['middleware'=>['auth:sanctum','verified','auth',]],function(){
     Route::get('package/{slug}', PackageDetailsComponent::class);
     Route::get('packages/order', PackageOrderComponent::class);
     Route::get('packages/{id}', MyPackageOrderComponent::class);
+    Route::get('packages/order/history', MyPackageOrderComponent::class);
     Route::get('package/ratting/{id}', RattingComponent::class);
     Route::get('package/payment/{id}', PackagePaymentComponent::class);
     Route::get('report/{post_id}', ReportComponent::class)->name('report');
