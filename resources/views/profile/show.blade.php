@@ -12,6 +12,11 @@
 
                 <x-jet-section-border />
             @endif
+                @if(\App\Models\Channel::where('user_id',auth()->id())->first())
+                    @livewire('channel-update-component')
+
+                    <x-jet-section-border />
+                @endif
 
             @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updatePasswords()))
                 <div class="mt-10 sm:mt-0">
@@ -32,6 +37,8 @@
             <div class="mt-10 sm:mt-0">
                 @livewire('profile.logout-other-browser-sessions-form')
             </div>
+
+
 
             @if (Laravel\Jetstream\Jetstream::hasAccountDeletionFeatures())
                 <x-jet-section-border />

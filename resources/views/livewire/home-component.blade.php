@@ -1,53 +1,5 @@
 <div>
     @livewire('channel-post-component')
-    {{--    <div class="card">--}}
-    {{--        <div class="card-body">--}}
-    {{--            <form action="" method="GET">--}}
-    {{--                <div class="row">--}}
-    {{--                    <div class="col-md-6">--}}
-    {{--                        <div class="form-group">--}}
-    {{--                                <select wire:model="selectedDivision" name="division_id" class="form-control">--}}
-    {{--                                <option value="" selected>Choose state</option>--}}
-    {{--                                @foreach ($divisions as $division)--}}
-    {{--                                    <option value="{{ $division->id }}">{{ $division->name }}--}}
-    {{--                                    </option>--}}
-    {{--                                @endforeach--}}
-    {{--                            </select>--}}
-    {{--                            @error('selectedDivision')--}}
-    {{--                            <span class="error">{{ $message }}</span>--}}
-    {{--                            @enderror--}}
-    {{--                        </div>--}}
-    {{--                    </div>--}}
-    {{--                    <div class="col-md-6">--}}
-    {{--                        @if (!is_null($selectedDivision))--}}
-    {{--                            <div class="form-group">--}}
-    {{--                                <select class="form-control" wire:model="district"--}}
-    {{--                                        name="district_id">--}}
-    {{--                                    <option value="" selected>Choose district</option>--}}
-    {{--                                    @foreach ($districts as $district)--}}
-    {{--                                        <option value="{{ $district->id }}">--}}
-    {{--                                            {{ $district->name }}</option>--}}
-    {{--                                    @endforeach--}}
-    {{--                                </select>--}}
-
-    {{--                            </div>--}}
-
-    {{--                        @endif--}}
-    {{--                        @error('district_id')--}}
-    {{--                        <span class="error">{{ $message }}</span>--}}
-    {{--                        @enderror--}}
-    {{--                    </div>--}}
-    {{--                    <div class="col-md-12">--}}
-    {{--                        <input wire:model="text" name="search" class="form-control" type="text">--}}
-    {{--                    </div>--}}
-    {{--                    <div class="col-md-12">--}}
-    {{--                        <br>--}}
-    {{--                        <button class="btn-info">Search</button>--}}
-    {{--                    </div>--}}
-    {{--                </div>--}}
-    {{--            </form>--}}
-    {{--        </div>--}}
-    {{--    </div>--}}
     <div class="loadMor">
         @php
             $i=0;
@@ -60,11 +12,8 @@
 
                 <div class="user-post">
                     <div class="friend-info">
-
-
                         <figure>
                             <img src="{{ asset('storage/'.$post->channel->image)}}">
-
                             {{-- <img src="{{ $post->channel->image }}" alt=""> --}}
                         </figure>
                         <div class="friend-name">
@@ -128,21 +77,13 @@
                                 @endif
 
                             @endforeach
-
-                            {{-- <img src="{{ $post->postimage->image }}" alt=""> --}}
                             <div class="we-video-info">
                                 <ul>
-                                    {{-- <li>
-                                        <span class="views" data-toggle="tooltip" title="views">
-                                            <i class="fa fa-eye"></i>
-                                            <ins>1.2k</ins>
-                                        </span>
-                                    </li> --}}
                                     <li>
-<span class="comment" data-toggle="tooltip" title="Comments">
-<i class="fa fa-comments-o"></i>
-<ins>{{ $post->comment->count() }}</ins>
-</span>
+                                        <span class="comment" data-toggle="tooltip" title="Comments">
+                                        <i class="fa fa-comments-o"></i>
+                                        <ins>{{ $post->comment->count() }}</ins>
+                                        </span>
                                     </li>
                                     <li>
                                         <style>
