@@ -355,11 +355,11 @@
 											<li>
 												<i class="ti-share"></i>
 												<a href="people-nearby.html" title="">People Nearby</a>
-											</li>
+											</li>-->
 											<li>
 												<i class="fa fa-bar-chart-o"></i>
-												<a href="insights.html" title="">insights</a>
-											</li> -->
+												<a href="{{ route('profile.show') }}" title="">Profile</a>
+											</li>
 											<li>
 
                                             <form method="POST" action="{{ route('logout') }}">
