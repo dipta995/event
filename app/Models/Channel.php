@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Devfaysal\BangladeshGeocode\Models\District;
+use Devfaysal\BangladeshGeocode\Models\Division;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,6 +28,13 @@ class Channel extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    public function divisionName()
+    {
+        return $this->belongsTo(Division::class,'division','id');
+    } public function districtName()
+    {
+        return $this->belongsTo(District::class,'district','id');
     }
     public function channelpayment()
     {

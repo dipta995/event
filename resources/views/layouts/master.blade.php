@@ -316,7 +316,7 @@
 											</li> -->
                                             <li>
 												<i class="ti-mouse-alt"></i>
-												<a href="{{ url('packages/order/history') }}" title="">Package History</a>
+												<a href="{{ url('packages/order/history') }}" title="">Buy Package</a>
 											</li>
 											@if (auth()->user()->channel=='yes')
                                             <li>

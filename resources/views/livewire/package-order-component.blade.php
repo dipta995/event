@@ -4,6 +4,8 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Package Title</th>
+            <th scope="col">Customer Name</th>
+            <th scope="col">Customer Contact</th>
             <th scope="col">Price</th>
             <th scope="col">Account no</th>
             <th scope="col">From date</th>
@@ -17,6 +19,8 @@
             <tr>
                 <th scope="row">{{ $key+1 }}</th>
                 <td>{{ $item->package->name }}</td>
+                <td><a href="{{ route('view.user',$item->user_id) }}">{{ $item->user->name }}</a></td>
+                <td>{{ $item->user->phone   }}</td>
                 <td>{{ $item->amount }}</td>
                 <td>{{ $item->account_no }}</td>
                 <td>{{ $item->from_date }}</td>

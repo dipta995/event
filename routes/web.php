@@ -25,6 +25,7 @@ use App\Http\Livewire\PostComponent;
 use App\Http\Livewire\RattingComponent;
 use App\Http\Livewire\ReportComponent;
 use App\Http\Livewire\ViewchannelComponent;
+use App\Http\Livewire\ViewUserComponent;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
@@ -46,25 +47,25 @@ Route::get('/storage-shortcut', function () {
 //     return view('welcome');
 // });
 Route::group(['as' => 'admin.', 'prefix' => 'admin'], function () {
-     Route::post('/logout/submit',[AuthenticatedSessionController::class,'destroy'])->name('logout.submit');
+    Route::post('/logout/submit', [AuthenticatedSessionController::class, 'destroy'])->name('logout.submit');
 });
-Route::get('remove-post-image/',[DashboardController::class,'removepostImage'])->name('removepostImage');
-Route::get('remove-package-image',[DashboardController::class,'removepackageImage'])->name('removepackageImage');
+Route::get('remove-post-image/', [DashboardController::class, 'removepostImage'])->name('removepostImage');
+Route::get('remove-package-image', [DashboardController::class, 'removepackageImage'])->name('removepackageImage');
 
 Route::group(['prefix' => 'admin'], function () {
-    Route::get('/',[DashboardController::class,'index'])->name('home');
-    Route::resource('roles', RolesController::class,['names'=>'admin.roles']);
-    Route::resource('users', UserController::class,['names'=>'admin.users']);
-    Route::resource('reports', ReportController::class,['names'=>'admin.reports']);
-    Route::resource('channel-payments', ChannelPaymentController::class,['names'=>'admin.channel.payments']);
-    Route::resource('channels', ChannelController::class,['names'=>'admin.channels']);
-    Route::resource('channle-posts', ChannelPostController::class,['names'=>'admin.channel.posts']);
-    Route::resource('packages', PackageController::class,['names'=>'admin.packages']);
-    Route::get('channel/packages/{user_id}', [ChannelController::class,'packages'])->name('packages');
-    Route::get('channel/packages/edit/{user_id}', [ChannelController::class,'editPackage'])->name('packages.edit');
-    Route::get('channel/packages/delete/{id}', [ChannelController::class,'deletePackage'])->name('packages.delete');
-    Route::get('channel/packages/order/delete/{id}', [ChannelController::class,'deleteOrder'])->name('packages.order.delete');
-    Route::get('channel/packages/order/{package_id}', [ChannelController::class,'packageOrders'])->name('package.orders');
+    Route::get('/', [DashboardController::class, 'index'])->name('home');
+    Route::resource('roles', RolesController::class, ['names' => 'admin.roles']);
+    Route::resource('users', UserController::class, ['names' => 'admin.users']);
+    Route::resource('reports', ReportController::class, ['names' => 'admin.reports']);
+    Route::resource('channel-payments', ChannelPaymentController::class, ['names' => 'admin.channel.payments']);
+    Route::resource('channels', ChannelController::class, ['names' => 'admin.channels']);
+    Route::resource('channle-posts', ChannelPostController::class, ['names' => 'admin.channel.posts']);
+    Route::resource('packages', PackageController::class, ['names' => 'admin.packages']);
+    Route::get('channel/packages/{user_id}', [ChannelController::class, 'packages'])->name('packages');
+    Route::get('channel/packages/edit/{user_id}', [ChannelController::class, 'editPackage'])->name('packages.edit');
+    Route::get('channel/packages/delete/{id}', [ChannelController::class, 'deletePackage'])->name('packages.delete');
+    Route::get('channel/packages/order/delete/{id}', [ChannelController::class, 'deleteOrder'])->name('packages.order.delete');
+    Route::get('channel/packages/order/{package_id}', [ChannelController::class, 'packageOrders'])->name('package.orders');
 
 });
 
@@ -73,12 +74,12 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 
-
-Route::group(['middleware'=>['auth:sanctum','verified','auth',]],function(){
+Route::group(['middleware' => ['auth:sanctum', 'verified', 'auth',]], function () {
     Route::get('/', HomeComponent::class)->name('customer.home');
 
     Route::get('/channel/create', ChannelCreate::class);
     Route::get('channel/{slug}', ViewchannelComponent::class);
+    Route::get('profile/details/{id}', ViewUserComponent::class)->name('view.user');
     Route::get('channel/payment/{userid}', ChannelPaymentComponent::class);
     Route::get('post/{slug}', PostComponent::class)->name('post-details');
     Route::get('post/edit/{id}', EditPostComponent::class)->name('edit.post');
@@ -92,7 +93,6 @@ Route::group(['middleware'=>['auth:sanctum','verified','auth',]],function(){
     Route::get('report/{post_id}', ReportComponent::class)->name('report');
     Route::get('channel-package/{slug}', PackagesForChannel::class);
     Route::get('/test1', Dropdowns::class);
-
 
 
 });

@@ -3,6 +3,21 @@
 
 
 <div class="loadMor">
+    <div class="card">
+        <div class="card-body">
+            <ul>
+
+                <li><img style="height: 200px;" src="{{ asset('storage/'.$mychannel->image)}}" alt=""></li>
+                <li><strong>Name :</strong> <span style="color: deepskyblue;">{{ $mychannel->name }}</span></li>
+                <li><strong>Phone no :</strong> <span style="color: deepskyblue;">{{ $mychannel->phone }}</span></li>
+                <li><strong>Address :</strong> <span style="color: deepskyblue;">{{ $mychannel->divisionName->name }} , {{ $mychannel->districtName->name }}{{ $mychannel->address }}</span></li>
+            </ul>
+
+
+
+
+        </div>
+    </div>
 @php
     $i=0;
 @endphp
@@ -17,7 +32,7 @@
 
             <figure>
                 {{-- <img src="{{ asset('storage/'.$mychannel->image)}}"> --}}
-                <img src="{{ $post->channel->image }}" alt="">
+                <img src="{{ asset('storage/'.$post->channel->image)}}" alt="">
             </figure>
             <div class="friend-name">
                 <ins><a href="{{ url('/channel') }}/{{ $post->channel->slug  }}" title="">{{ $post->channel->name }}</a>
