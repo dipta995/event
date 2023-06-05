@@ -19,6 +19,7 @@ class PackageComponent extends Component
     public $banner;
     public $packageID;
     public $images = [];
+    public $images_all;
     public $updatePackage = false;
     public $addPackage = false;
 
@@ -81,6 +82,16 @@ class PackageComponent extends Component
             if (!$row) {
                 session()->flash('error', 'Post not found');
             } else {
+//                if (isset($this->banner)){
+//                $rules['name'] = $this->banner->store('banner', 'public');
+//                $this->banner = json_encode($this->banner);
+//                }
+//                if (!empty($this->images)){
+//                foreach ($this->images as $key => $image) {
+//                    $this->images[$key] = $image->store('images', 'public');
+//                }
+//                $this->images = json_encode($this->images);
+//                }
 
                 $this->packageID = $row->id;
                 $this->name = $row->name;
@@ -89,6 +100,7 @@ class PackageComponent extends Component
                 $this->day = $row->day;
                 $this->description = $row->description;
                 $this->banner = $row->banner;
+                $this->images_all = $row->images;
                 $this->updatePackage = true;
                 $this->addPackage = false;
 
@@ -112,16 +124,31 @@ class PackageComponent extends Component
 
 public function updatePackage()
 {
+    $rules['name'] = $this->banner->store('banner', 'public');
+    $this->banner = json_encode($this->banner);
+    foreach ($this->images as $key => $image) {
+        $this->images[$key] = $image->store('images','public');
+    }
+    if ($this->images !== null) {
+        $existingImagesArray = \GuzzleHttp\json_decode($this->images_all, true); // Convert string to an array
+
+        $mergedImagesArray = array_merge($existingImagesArray, $this->images); // Merge the two arrays
+
+        $updatedImages = json_encode($mergedImagesArray); // Convert the merged array back to a JSON string
+        $newImages = $updatedImages;
+    }
         Package::whereId($this->packageID)->update([
             'name' => $this->name,
             'price' => $this->price,
             'discount' => $this->discount,
-            'images' => $this->images,
-            'banner' => $this->banner,
+            'images' => $newImages,
+            'banner' => $rules['name'],
             'day' => $this->day,
             'description' => $this->description,
         ]);
         $this->resetFields();
+        $this->banner = '';
+        $this->images = [];
         $this->updatePost = false;
 
 }
@@ -137,5 +164,36 @@ public function removeMe($index)
 {
     array_splice($this->images, $index, 1);
 }
+
+    public function removepackageImage($imgdata,$id)
+    {
+        $images = Package::find($id)->images;
+        $imageToRemove = $imgdata;
+// Decode the JSON string to an array
+        $decodedImages = json_decode($images, true);
+
+// Remove the specified image from the array
+        $updatedImages = array_filter($decodedImages, function ($image) use ($imageToRemove) {
+            return $image !== $imageToRemove;
+        });
+
+// Convert the updated array to the old format
+        $oldFormat = json_encode(array_values($updatedImages));
+
+// Output the updated array in the old format
+
+
+
+$this->images = $updatedImages;
+
+        $row = Package::find($id);
+        $row->images = $oldFormat;
+        $row->save();
+        $this->images = null;
+        $this->editPackage($id);
+        return redirect();
+
+    }
+
 
 }

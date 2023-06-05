@@ -56,6 +56,7 @@
                                 @error('banner')
                                 <span class="error">{{ $message }}</span>
                                 @enderror
+                                <img src="{{ asset('storage/'.$banner)}}">
                             </div>
                         </div>
                     </div>
@@ -76,7 +77,7 @@
                         @foreach ($images as $key=>$image)
                         <div class="col-xs-2">
                             <div class="card-body">
-                                <img style="float: left;height: 60px; position: relative;" src="{{ $image->temporaryUrl() }}" alt="Uploading...">
+                                <img style="float: left;height: 60px; position: relative;" src="{{ $image->temporaryUrl()   }}" alt="Uploading...">
                                 <div style="color: red; font-size: 20px; position: absolute;" wire:key="{{$loop->index}}">
                                     <a wire:click="removeMe({{$loop->index}})"><i class="fa fa-trash"></i></a>
                                 </div>
@@ -86,6 +87,13 @@
                         @endforeach
                     </div>
                             @endif
+                        @if ($images_all)
+                            <div class="row">
+                                @foreach (\GuzzleHttp\json_decode($images_all) as $key=>$image)
+                                    @include('livewire.remove-package-image', ['image' => $image,'imageId' => $packageID])
+                                @endforeach
+                            </div>
+                        @endif
                     </div>
                 </div>
 

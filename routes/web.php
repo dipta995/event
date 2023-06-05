@@ -49,6 +49,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin'], function () {
      Route::post('/logout/submit',[AuthenticatedSessionController::class,'destroy'])->name('logout.submit');
 });
 Route::get('remove-post-image/',[DashboardController::class,'removepostImage'])->name('removepostImage');
+Route::get('remove-package-image',[DashboardController::class,'removepackageImage'])->name('removepackageImage');
 
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/',[DashboardController::class,'index'])->name('home');
