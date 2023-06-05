@@ -34,8 +34,6 @@ class HomeComponent extends Component
     {
         $this->perPage = $this->perPage + 5;
     }
-    //pagination zone
-
     public $comment;
     public function resetcomment()
     {

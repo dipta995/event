@@ -13,10 +13,8 @@ class NotificationComponent extends Component
     {
         $userid = Auth::id();
         $notification = Notification::where('user_id',$userid)->latest()->get();
-
         $notificationcount = Notification::where('user_id',$userid)->where('read','no')->get();
         $notificationcount = $notificationcount->count();
-        //$this->emit('refreshComponent');
         return view('livewire.notification-component',compact('notification','notificationcount'));
     }
     public function makeNotificationRead()

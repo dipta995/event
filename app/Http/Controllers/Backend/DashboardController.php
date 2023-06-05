@@ -19,54 +19,35 @@ class DashboardController extends Controller
     public function removepostImage()
     {
         $images = Image::find(\request('id'))->image;
-
-
         $imageToRemove = \request('image');
-
 // Decode the JSON string to an array
         $decodedImages = json_decode($images, true);
-
 // Remove the specified image from the array
         $updatedImages = array_filter($decodedImages, function ($image) use ($imageToRemove) {
             return $image !== $imageToRemove;
         });
-
 // Convert the updated array to the old format
         $oldFormat = json_encode(array_values($updatedImages));
-
 // Output the updated array in the old format
-
-
-
-
-
         $row = Image::find(\request('id'));
         $row->image = $oldFormat;
         $row->save();
         return back();
-
     }
+
     public function removepackageImage()
     {
         $images = Package::find(\request('id'))->images;
         $imageToRemove = \request('image');
 // Decode the JSON string to an array
         $decodedImages = json_decode($images, true);
-
 // Remove the specified image from the array
         $updatedImages = array_filter($decodedImages, function ($image) use ($imageToRemove) {
             return $image !== $imageToRemove;
         });
-
 // Convert the updated array to the old format
         $oldFormat = json_encode(array_values($updatedImages));
-
 // Output the updated array in the old format
-
-
-
-
-
         $row = Package::find(\request('id'));
         $row->images = $oldFormat;
         $row->save();

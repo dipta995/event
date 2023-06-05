@@ -39,7 +39,7 @@
                                                     @endforeach
                                                 </select>
                                                 @error('selectedDivision')
-                                                    <span class="error">{{ $message }}</span>
+                                                <span class="error">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                         </div>
@@ -47,10 +47,9 @@
 
                                             @if (!is_null($selectedDivision))
 
-
                                                 <div class="form-group">
                                                     <select class="form-control" wire:model="district"
-                                                        name="district_id">
+                                                            name="district_id">
                                                         <option value="" selected>Choose district</option>
                                                         @foreach ($districts as $district)
                                                             <option value="{{ $district->id }}">
@@ -62,37 +61,37 @@
 
                                             @endif
                                             @error('district_id')
-                                                <span class="error">{{ $message }}</span>
+                                            <span class="error">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="col-md-2"></div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <input wire:model="name" type="text" id="input" required="required" />
+                                                <input wire:model="name" type="text" id="input" required="required"/>
                                                 <label class="control-label" for="input">Business Channel
                                                     Name</label><i class="mtrl-select"></i>
                                                 @error('name')
-                                                    <span class="error">{{ $message }}</span>
+                                                <span class="error">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <input type="text" id="input" wire:model="phone" required="required" />
+                                                <input type="text" id="input" wire:model="phone" required="required"/>
                                                 <label class="control-label" for="input">Phone No.</label><i
                                                     class="mtrl-select"></i>
                                             </div>
                                             @error('phone')
-                                                <span class="error">{{ $message }}</span>
+                                            <span class="error">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="col-md-12">
                                             <div class="mb-3 ">
                                                 <input class="form-control" type="file" wire:model="images"
-                                                    id="formFile">
+                                                       id="formFile">
                                             </div>
                                             @error('images')
-                                                <span class="error">{{ $message }}</span>
+                                            <span class="error">{{ $message }}</span>
                                             @enderror
 
                                         </div>
@@ -101,12 +100,13 @@
 
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <textarea style="height: 70px;" wire:model="address" rows="4" id="textarea" required="required"></textarea>
+                                                <textarea style="height: 70px;" wire:model="address" rows="4"
+                                                          id="textarea" required="required"></textarea>
                                                 <label class="control-label" for="textarea">Office Address</label><i
                                                     class="mtrl-select"></i>
                                             </div>
                                             @error('address')
-                                                <span class="error">{{ $message }}</span>
+                                            <span class="error">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="submit-btns">
