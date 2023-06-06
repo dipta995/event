@@ -43,9 +43,10 @@ use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 Route::get('/storage-shortcut', function () {
     Artisan::call('storage:link');
 });
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/livewire/message/home-component', function () {
+    $page = request('page');
+    return redirect()->route('customer.home', ['page' => $page]);
+});
 Route::group(['as' => 'admin.', 'prefix' => 'admin'], function () {
     Route::post('/logout/submit', [AuthenticatedSessionController::class, 'destroy'])->name('logout.submit');
 });

@@ -28,7 +28,7 @@
 				<a class="" href="#menu"><i class="fa fa-align-justify"></i></a>
 			</span>
 			<span class="mh-text">
-				<a href="{{ url('/') }}" title=""><img style="height: 65px;" src="{{ asset('user/images/logo2.png') }}" alt=""></a>
+				<a href="{{ url('/') }}" title=""><img style="height: 65px;" src="{{ asset('user/images/logo.png') }}" alt=""></a>
 			</span>
 			<span class="mh-btns-right">
 				<a class="fa fa-sliders" href="#shoppingbag"></a>
@@ -519,19 +519,19 @@
 		</div><!-- side panel -->
         @livewireScripts
 
-        <script type="text/javascript">
+{{--        <script type="text/javascript">--}}
 
-            window.onscroll = function(ev) {
+{{--            window.onscroll = function(ev) {--}}
 
-                if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+{{--                if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {--}}
 
-                    window.livewire.emit('load-more');
+{{--                    window.livewire.emit('load-more');--}}
 
-                }
+{{--                }--}}
 
-            };
+{{--            };--}}
 
-      </script>
+{{--      </script>--}}
     <script src="{{ asset('user/js/main.min.js') }}"></script>
 	<script src="{{ asset('user/js/script.js') }}"></script>
 	<script src="{{ asset('user/js/map-init.js') }}"></script>

@@ -13,26 +13,37 @@ use Devfaysal\BangladeshGeocode\Models\District;
 use Devfaysal\BangladeshGeocode\Models\Division;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Livewire\WithPagination;
+use Illuminate\Pagination\Paginator;
+
+
 
 
 class HomeComponent extends Component
 {
+    use WithPagination;
+    public $search = '';
     public $divisions;
     public $text;
     public $districts;
     public $district;
     public $district_id;
     public $division_id;
-    public $search;
     public $selectedDivision = NULL;
     //pagination zone
     public $perPage = 5;
     protected $listeners = [
         'load-more' => 'loadMore'
     ];
-    public function loadMore()
+//    public function loadMore()
+//    {
+//        $this->perPage = $this->perPage + 1;
+//    }
+    //pagination zone
+    public function gotoPage($page)
     {
-        $this->perPage = $this->perPage + 5;
+        $this->page = $page;
+        $this->resetPage();
     }
     public $comment;
     public function resetcomment()
@@ -41,13 +52,16 @@ class HomeComponent extends Component
     }
     public function render()
     {
+        Paginator::useBootstrapFive();
+
         if (auth()->user()->channel == 'yes') {
 
             $mychannel = Channel::where('user_id', auth()->user()->id)->first();
         } else {
             $mychannel = Null;
         }
-            $posts = Post::where('status', 'published')->latest()->paginate($this->perPage);
+
+            $posts = Post::where('status', 'published')->where('post_text', 'like', '%'.$this->search.'%')->latest()->paginate($this->perPage);
         return view('livewire.home-component', compact('posts', 'mychannel'))->layout('layouts.master');
     }
     public function mount()

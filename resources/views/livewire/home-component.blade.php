@@ -1,4 +1,10 @@
 <div>
+    <div class="card">
+        <div class="card-body">
+            <input class="form-control" type="text" wire:model="search" placeholder="Search...">
+
+        </div>
+    </div>
     @livewire('channel-post-component')
     <div class="loadMor">
         @php
@@ -204,6 +210,9 @@
             </div>
 
         @endforeach
+
+        {{  $posts->links()  }}
+
     </div>
 </div>
 
