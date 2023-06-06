@@ -6,10 +6,10 @@
                 <img src="{{ asset('storage/'.$package->banner)}}">
             </figure>
                <h3 style="color:#000; margin: 50px;">{{ $channelinfo->name }}</h3>
-               <a class="btn btn-success" href="{{ url('package/payment',$package->id) }}">Pay</a>
+               <a class="btn btn-success" href="{{ url('package/payment',$package->id) }}">Order and Pay</a>
             </div>
           <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-12">
                 <div style="color: #000; margin: 50px;">
                     <h4>{{ $package->name }}</h4>
                     <p>{{ $package->description }}</p>

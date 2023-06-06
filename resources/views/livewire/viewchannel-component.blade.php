@@ -7,10 +7,10 @@
         <div class="card-body">
             <ul>
 
-                <li><img style="height: 200px;" src="{{ asset('storage/'.$mychannel->image)}}" alt=""></li>
-                <li><strong>Name :</strong> <span style="color: deepskyblue;">{{ $mychannel->name }}</span></li>
-                <li><strong>Phone no :</strong> <span style="color: deepskyblue;">{{ $mychannel->phone }}</span></li>
-                <li><strong>Address :</strong> <span style="color: deepskyblue;">{{ $mychannel->divisionName->name }} , {{ $mychannel->districtName->name }}{{ $mychannel->address }}</span></li>
+                <li><img style="height: 200px;" src="{{ asset('storage/'.$channelDetails->image)}}" alt=""></li>
+                <li><strong>Name :</strong> <span style="color: deepskyblue;">{{ $channelDetails->name }}</span></li>
+                <li><strong>Phone no :</strong> <span style="color: deepskyblue;">{{ $channelDetails->phone }}</span></li>
+                <li><strong>Address :</strong> <span style="color: deepskyblue;">{{ \Devfaysal\BangladeshGeocode\Models\Division::find($channelDetails->division)->first()->name }} , {{ \Devfaysal\BangladeshGeocode\Models\District::find($channelDetails->district)->first()->name }} ,{{ $channelDetails->address }}</span></li>
             </ul>
 
 
@@ -113,42 +113,6 @@
                                 <ins>200</ins>
                             </span>
                         </li> --}}
-                        <li class="social-media">
-                            <div class="menu">
-                              <div class="btn trigger"><i class="fa fa-share-alt"></i></div>
-                              <div class="rotater"></div>
-                              <div class="rotater">
-                                <div class="btn btn-icon"><a href="#" title=""><i class="fa fa-facebook"></i></a></div>
-                              </div>
-                              <div class="rotater">
-                                  <div class="btn btn-icon"><a href="#" title=""><i class="fa fa-twitter"></i></a></div>
-                                </div>
-                                <div class="rotater">
-                                  <div class="btn btn-icon"><a href="#" title=""><i class="fa fa-instagram"></i></a>
-                                </div>
-                              </div>
-                              <div class="rotater"></div>
-                              {{-- <div class="rotater">
-                                  <div class="btn btn-icon"><a href="#" title=""><i class="fa fa-css3"></i></a></div>
-                                </div>
-
-                                <div class="rotater">
-                                    <div class="btn btn-icon"><a href="#" title=""><i class="fa fa-dribbble"></i></a>
-                                    </div>
-                                </div>
-                                <div class="rotater">
-                                  <div class="btn btn-icon"><a href="#" title=""><i class="fa fa-google-plus"></i></a></div>
-                                </div>
-                              <div class="rotater">
-                                <div class="btn btn-icon"><a href="#" title=""><i class="fa fa-pinterest"></i></a>
-                                </div>
-                              </div>
-                              <div class="rotater">
-                                <div class="btn btn-icon"><a href="#" title=""><i class="fa fa-html5"></i></a></div>
-                              </div> --}}
-
-                            </div>
-                        </li>
                         <a href="#demo{{ $i }}" data-toggle="collapse">view Comment</a>
                          <a style="float: right;" href="{{ url('post/'.$post->slug) }}" >See more</a>
                     </ul>

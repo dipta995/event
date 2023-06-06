@@ -70,7 +70,7 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
+    return view('livewire.home-component');
 })->name('dashboard');
 
 

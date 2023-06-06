@@ -1,7 +1,7 @@
 <div>
     <style>
         .error{
-            color: black;
+            color: red;
         }
     </style>
     <div class="card">

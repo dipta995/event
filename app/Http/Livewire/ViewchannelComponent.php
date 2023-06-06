@@ -38,6 +38,7 @@ class ViewchannelComponent extends Component
     }
     public function render()
     {
+        $channelDetails = Channel::where('slug',$this->slug)->first();
         if (auth()->user()->channel=='yes') {
 
             $mychannel = Channel::where('user_id',auth()->user()->id)->first();
@@ -55,7 +56,7 @@ else{
 }
 
 
-        return view('livewire.viewchannel-component',compact('posts','mychannel'))->layout('layouts.master');
+        return view('livewire.viewchannel-component',compact('posts','mychannel','channelDetails'))->layout('layouts.master');
     }
     public function addPostLike($user_id,$post_id)
     {
